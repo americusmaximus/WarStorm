@@ -48,7 +48,7 @@ enum AudioStateState
 
 struct AudioStateContainer
 {
-    BOOL                IsActive;                               // 0x6ad52034
+    BOOL                IsExit;                                 // 0x6ad52034
     AudioStateState     State;                                  // 0x6ad52038
     OggVorbis_File      Vorbis;                                 // 0x6ad59d80
 

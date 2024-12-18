@@ -121,9 +121,9 @@ BOOL OpenAudio(SoundTrack* track, DOUBLE position)
         AudioState.Wave.Format.wFormatTag = WAVE_FORMAT_PCM;
         AudioState.Wave.Format.nChannels = (WORD)vi->channels;
         AudioState.Wave.Format.nSamplesPerSec = vi->rate;
+        AudioState.Wave.Format.nBlockAlign = AudioState.Wave.Format.nChannels * 2;
         AudioState.Wave.Format.nAvgBytesPerSec =
             AudioState.Wave.Format.nBlockAlign * AudioState.Wave.Format.nSamplesPerSec;
-        AudioState.Wave.Format.nBlockAlign = AudioState.Wave.Format.nChannels * 2;
         AudioState.Wave.Format.wBitsPerSample = 16;
         AudioState.Wave.Format.cbSize = 0;
 
@@ -330,7 +330,7 @@ START:
                 {
                     EnterCriticalSection(&State.Mutex);
 
-                    if (!AudioState.IsActive)
+                    if (!AudioState.IsExit)
                     {
                         AudioState.Worker = NULL;
 
@@ -356,9 +356,9 @@ START:
 
                 while (AudioState.State != AUDIOSTATE_PLAY) { Sleep(200); }
 
-                if (!AudioState.IsActive) { break; }
+                if (!AudioState.IsExit) { break; }
 
-                AudioState.IsActive = FALSE;
+                AudioState.IsExit = FALSE;
 
                 last = AudioState.Context.Last;
 
@@ -371,7 +371,7 @@ START:
 
             if (AudioState.State == AUDIOSTATE_STOP)
             {
-                if (!AudioState.IsActive) { AudioState.Track = AudioState.Track + 2; }
+                if (!AudioState.IsExit) { AudioState.Track = AudioState.Track + 2; }
 
                 goto START;
             }
@@ -380,14 +380,14 @@ START:
             {
                 if (!PlayAudio())
                 {
-                    if (!AudioState.IsActive) { AudioState.Track = AudioState.Track + 2; }
+                    if (!AudioState.IsExit) { AudioState.Track = AudioState.Track + 2; }
 
                     goto START;
                 }
 
                 Sleep(200);
 
-                if (!AudioState.IsActive) { goto START; }
+                if (AudioState.IsExit) { goto START; }
             } while (AudioState.State == AUDIOSTATE_PLAY);
         } while (AudioState.State == AUDIOSTATE_PAUSE);
     }
