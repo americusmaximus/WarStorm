@@ -18,6 +18,39 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Action.cxx" />
+    <ClCompile Include="App.cxx" />
+    <ClCompile Include="Main.cxx" />
+    <ClCompile Include="Message.cxx" />
+    <ClCompile Include="Module.cxx" />
+    <ClCompile Include="Renderer.cxx" />
+    <ClCompile Include="Settings.cxx" />
+    <ClCompile Include="Sound.cxx" />
+    <ClCompile Include="State.cxx" />
+    <ClCompile Include="Strings.cxx" />
+    <ClCompile Include="Window.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Action.hxx" />
+    <ClInclude Include="App.hxx" />
+    <ClInclude Include="Basic.hxx" />
+    <ClInclude Include="Message.hxx" />
+    <ClInclude Include="Module.hxx" />
+    <ClInclude Include="Renderer.hxx" />
+    <ClInclude Include="Settings.hxx" />
+    <ClInclude Include="Strings.hxx" />
+    <ClInclude Include="WarStorm.hxx" />
+    <ClInclude Include="Sound.hxx" />
+    <ClInclude Include="State.hxx" />
+    <ClInclude Include="Window.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WarStorm.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="WarStorm.ico" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -73,25 +106,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
