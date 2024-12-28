@@ -22,8 +22,38 @@ SOFTWARE.
 
 #pragma once
 
-#include "RendererModule.Basic.hxx"
+#include "BinFile.hxx"
 
-typedef RENDERERPTR(*RENDERERINITACTIONLAMBDA)(VOID);
+#define INVALID_BINARCHIVE_INDEX    (-1)
 
-typedef BOOL(*ACQUIRERENDERERSETTINGSVALUELAMBDA)(VOID);
+#define BINARCHIVE_MAGIC            0x53465A46 /* FZFS */
+
+typedef enum BinArchiveType
+{
+    BINARCHIVETYPE_NONE = 0,
+    BINARCHIVETYPE_FILE = 1,
+    BINARCHIVETYPE_DIRECTORY = 2,
+    BINARCHIVETYPE_FORCE_DWORD = 0x7FFFFFF
+} BINARCHIVETYPE, * BINARCHIVETYPEPTR;
+
+typedef struct BinArchiveHeader
+{
+    U32                 Magic;
+    U32                 Offset;
+} BINARCHIVEHEADER, * BINARCHIVEHEADERPTR;
+
+typedef struct BinArchiveDescriptor
+{
+    U32                 Size;
+    U32                 Count;
+    U32                 Length;
+} BINARCHIVEDESCRIPTOR, * BINARCHIVEDESCRIPTORPTR;
+
+typedef struct BinArchive
+{
+    BINARCHIVETYPE      Type;
+    CHAR                Name[MAX_FILE_NAME_LENGTH];
+    U32* Offsets;
+    LPSTR               Names;
+    BINFILE             File;
+} BINARCHIVE, * BINARCHIVEPTR;

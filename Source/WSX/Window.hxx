@@ -25,7 +25,18 @@ SOFTWARE.
 #include "Basic.hxx"
 #include "Native.Basic.hxx"
 
+#define VK_NULL                     0
+#define VK_SYMBOL                   0xFF
+
 #define MAX_WINDOW_TITLE_LENGTH     256
+
+typedef enum WindowInputState
+{
+    WINDOWINPUTSTATE_NONE               = 0,
+    WINDOWINPUTSTATE_ACCEPT_MOUSE       = 1,
+    WINDOWINPUTSTATE_ACCEPT_KEYBOARD    = 2,
+    WINDOWINPUTSTATE_FORCE_DWORD        = 0x7FFFFFFF
+} WINDOWINPUTSTATE, * WINDOWINPUTSTATEPTR;
 
 typedef struct Window
 {

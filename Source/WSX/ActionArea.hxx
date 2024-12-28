@@ -22,8 +22,18 @@ SOFTWARE.
 
 #pragma once
 
-#include "RendererModule.Basic.hxx"
+#include "Basic.hxx"
 
-typedef RENDERERPTR(*RENDERERINITACTIONLAMBDA)(VOID);
+#define DEFAULT_ACTION_PRIORITY 0x8000
 
-typedef BOOL(*ACQUIRERENDERERSETTINGSVALUELAMBDA)(VOID);
+typedef struct ActionArea
+{
+    U32             Action;
+    S32             X;
+    S32             Y;
+    S32             Width;
+    S32             Height;
+    U32             Options;
+    U32             Priority;
+    ActionArea* Next;
+} ACTIONAREA, * ACTIONAREAPTR;

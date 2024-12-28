@@ -22,8 +22,14 @@ SOFTWARE.
 
 #pragma once
 
-#include "RendererModule.Basic.hxx"
+#include "Basic.hxx"
+#include "Native.Basic.hxx"
 
-typedef RENDERERPTR(*RENDERERINITACTIONLAMBDA)(VOID);
+typedef U32             UNICHAR;
 
-typedef BOOL(*ACQUIRERENDERERSETTINGSVALUELAMBDA)(VOID);
+#define UNICHAR_SIZE    sizeof(UNICHAR)
+
+typedef struct StringValue
+{
+    LPSTR Value;
+} STRINGVALUE, * STRINGVALUEPTR;

@@ -22,8 +22,10 @@ SOFTWARE.
 
 #pragma once
 
-#include "RendererModule.Basic.hxx"
+#include "Basic.hxx"
 
-typedef RENDERERPTR(*RENDERERINITACTIONLAMBDA)(VOID);
+/* TODO Better Name */
+#define CONTROLACTION_UNKNOWN                               (-1) /* TODO  Back? */
 
-typedef BOOL(*ACQUIRERENDERERSETTINGSVALUELAMBDA)(VOID);
+#define CONTROLACTION_NONE                                  0000 /* TODO OK? */
+#define CONTROLACTION_1                                     1 /* TODO Cancel? */

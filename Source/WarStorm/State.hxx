@@ -33,7 +33,7 @@ typedef struct StateContainer
     struct
     {
         HMODULE                         Module;         // 0x00411264
-        RENDERERMODULESTATECONTAINERPTR State;          // 0x00411268
+        RENDERERPTR                     State;          // 0x00411268
     } Renderer;
 
     MODULEPTR                           Module;         // 0x004113c0

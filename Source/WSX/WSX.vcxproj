@@ -19,10 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.hxx" />
+    <ClInclude Include="ActionArea.hxx" />
     <ClInclude Include="App.hxx" />
+    <ClInclude Include="AssetFile.hxx" />
     <ClInclude Include="Basic.hxx" />
+    <ClInclude Include="BinArchive.hxx" />
     <ClInclude Include="BinAsset.hxx" />
     <ClInclude Include="BinFile.hxx" />
+    <ClInclude Include="Control.hxx" />
+    <ClInclude Include="ControlCommand.hxx" />
     <ClInclude Include="DirectDraw.hxx" />
     <ClInclude Include="DirectInput.hxx" />
     <ClInclude Include="DirectPlay.hxx" />
@@ -39,6 +45,7 @@
     <ClInclude Include="RendererModule.Export.hxx" />
     <ClInclude Include="RendererModule.Import.hxx" />
     <ClInclude Include="Sound.hxx" />
+    <ClInclude Include="Strings.hxx" />
     <ClInclude Include="VisualModule.Export.hxx" />
     <ClInclude Include="VisualModule.Import.hxx" />
     <ClInclude Include="Window.hxx" />

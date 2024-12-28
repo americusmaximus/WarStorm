@@ -22,8 +22,13 @@ SOFTWARE.
 
 #pragma once
 
-#include "RendererModule.Basic.hxx"
+#include "BinFile.hxx"
 
-typedef RENDERERPTR(*RENDERERINITACTIONLAMBDA)(VOID);
+#define INVALID_ASSET_FILE_OFFSET           (-1)
+#define INVALID_ASSET_FILE_SIZE             (-1)
+#define INVALID_ASSET_FILE_STRING_LENGTH    (-1)
 
-typedef BOOL(*ACQUIRERENDERERSETTINGSVALUELAMBDA)(VOID);
+typedef struct AssetFile
+{
+    BFH Value;
+} ASSETFILE, * ASSETFILEPTR;
