@@ -20,6 +20,7 @@ git clone --recurse-submodules https://github.com/americusmaximus/WarStorm
 2. [OGG](https://github.com/xiph/ogg) and [Vorbis](https://github.com/xiph/vorbis)
 3. [Yoink](https://github.com/americusmaximus/Yoink)
 4. [ZLib](https://github.com/madler/zlib)
+5. Intel JPEG library
 
 ## Notes
 1. I used GOG.com's Sudden Strike 2 version [13718](https://www.google.com/search?q=setup_sudden_strike_2_2.2_(13718).exe) of the game.
