@@ -8,7 +8,7 @@ War Storm is an open source implementation of Fireglow Games' [Sudden Strike II]
 There are multiple goals this project tries to achieve:
 - [x] Learn how games were made in an era when things had to be done in the code, and not through fancy game engines like today.
 - [ ] Have a fully playable game implemented end-to-end, including resource management, audio, and video rendering, as well as support of large screen resolutions.
-- [ ] Eventually, to support 64-bit compilation for modern systems, and provide an avenue for development of modern renderer implementations such as DirectX or Vulkan, and, eventually, to port to Linux or Mac.
+- [ ] Eventually, to support 64-bit compilation for modern systems.
 
 ## Code
 ```
@@ -28,11 +28,6 @@ git clone --recurse-submodules https://github.com/americusmaximus/WarStorm
 3. The GOG.com's version of the game uses Ogg Vorbis for the game's music. It looks like this was a recent change and a requirement for the game publishing, I believe original game shipped with mp3 files. In order to support Ogg Vorbis, the games has its own WinMM.dll library to support the file format, otherwise it is mostly a wrapper of the system library.
 4. The original game used zlib version 1.1.3, which I upgraded to 1.3.1 for proper 64-bit support.
 5. The original game uses RAD Game Tools' binkw32 library version 1.5G.
-
-### Compatibility, Code Style & Standards
-In order to be able to run the code not only in the modern operating systems, but also in legacy environments, such as Windows XP, the code base has to abstain from usage of modern C++ language features.
-
-Modern Visual Studio makes the binary dependent on modern runtime libraries that are not available in the legacy systems, therefore the game won't work. In order to make the code work on legacy systems please see [detailed instructions on compatibility](COMPATIBILITY.MD).
 
 ## Modules
 
@@ -56,6 +51,7 @@ The game module is responsible for the actual gameplay, associated resource mana
 ## Thanks
 1. [Hifi](https://github.com/hifi-unmaintained/ogg-winmm) for the original implementation of WinMM.dll with the Ogg Vorbis support. Even though the game's version is very customized, access to the original code was very useful.
 3. [elwray](https://github.com/elwray/N2CadX) for the initial research of the rendering modules.
+4. [IvanishinV](https://github.com/IvanishinV/MultiCAD) for completing reverse engineering and re-engineering of 1024x768 renderer for [Sudden Strike](https://github.com/americusmaximus/WarAction).
 
 ## Legal
 1. This is not a complete game. Please purchase software you like!
