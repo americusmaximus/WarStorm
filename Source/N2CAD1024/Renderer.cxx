@@ -1532,7 +1532,6 @@ VOID UnlockRendererSurface()
     ModuleState.Surface.Renderer = NULL;
 }
 
-
 // 0x10002a70
 BOOL WriteRendererSurfaceSurfaceRectangle(S32 sx, S32 sy, S32 width, S32 height, S32 dx, S32 dy, S32 stride, PIXEL* pixels)
 {
@@ -3038,6 +3037,7 @@ VOID CleanSurfaceRhomb(S32 angle_0, S32 angle_1, S32 angle_2, S32 angle_3, S32 t
         }
     }
 }
+
 // 0x100040e6
 VOID DrawSurfaceMaskRhomb(S32 x, S32 y, S32 stride, S32 mask, PIXEL* pixels)
 {
@@ -4571,7 +4571,6 @@ VOID DrawBackSurfacePaletteSprite(S32 x, S32 y, PIXEL* palette, IMAGEPALETTESPRI
         }
     }
 }
-
 
 // 0x10005b96
 VOID DrawBackSurfacePaletteSpriteAndStencil(S32 x, S32 y, U16 level, PIXEL* palette, IMAGEPALETTESPRITEPTR sprite)
