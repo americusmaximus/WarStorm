@@ -18,6 +18,36 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AssetFile.hxx" />
+    <ClInclude Include="Assets.hxx" />
+    <ClInclude Include="Basic.hxx" />
+    <ClInclude Include="Control.hxx" />
+    <ClInclude Include="Dossier.hxx" />
+    <ClInclude Include="Objects.hxx" />
+    <ClInclude Include="Resources.hxx" />
+    <ClInclude Include="Shortcuts.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssetFile.cxx" />
+    <ClCompile Include="Assets.cxx" />
+    <ClCompile Include="Dossier.cxx" />
+    <ClCompile Include="Shortcuts.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\winmm\winmm.vcxproj">
+      <Project>{aaa8b810-76ed-4500-a1a5-3fca33c316ad}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Yoink\Yoink.vcxproj">
+      <Project>{69f5f276-ce3a-4be7-8028-60e8e316525d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\zlib\zlib.vcxproj">
+      <Project>{e2ff48ba-a783-4302-9ecb-7e0be7334c9b}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -73,25 +103,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.0.Q;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.0.Q;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.0.Q;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WAX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.0.Q;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

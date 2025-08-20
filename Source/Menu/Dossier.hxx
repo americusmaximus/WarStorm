@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 - 2025 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,34 +22,8 @@ SOFTWARE.
 
 #pragma once
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
+#include <Dossier.hxx>
 
-#define VK_NULL                     0
-#define VK_INPUT                    0xFF
-
-#define MAX_WINDOW_TITLE_LENGTH     256
-
-typedef enum WindowInputState
-{
-    WINDOWINPUTSTATE_NONE               = 0,
-    WINDOWINPUTSTATE_ACCEPT_MOUSE       = 1,
-    WINDOWINPUTSTATE_ACCEPT_KEYBOARD    = 2,
-    WINDOWINPUTSTATE_FORCE_DWORD        = 0x7FFFFFFF
-} WINDOWINPUTSTATE, * WINDOWINPUTSTATEPTR;
-
-typedef struct Window
-{
-    HINSTANCE   Instance;
-    LPCSTR      Args;
-    HWND        HWND;
-    WNDCLASSA   Class;
-    CHAR        Title[MAX_WINDOW_TITLE_LENGTH];
-    DWORD       Style;
-    S32         X;
-    S32         Y;
-    S32         Width;
-    S32         Height;
-    HMENU       Menu;
-    BOOL        IsActive;
-} WINDOW, * WINDOWPTR;
+DOSSIERPTR ActivateDossier(DOSSIERPTR self);
+VOID InitializeDossier(DOSSIERPTR self, LPCSTR value);
+DOSSIERCATEGORY AcquireDossierCategory(DOSSIERPTR self, CONST CHAR value);

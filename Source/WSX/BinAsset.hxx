@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Americus Maximus
+Copyright (c) 2024 - 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,12 @@ SOFTWARE.
 #include "Native.Basic.hxx"
 #include "Renderer.Basic.hxx"
 
-#define IMAGESPRITE_ITEM_COUNT_MASK     0x7F
-#define IMAGESPRITE_ITEM_COMPACT_MASK   0x80
+#define IMAGESPRITE_ITEM_SMALL_PIXEL_MASK   0x1F
+#define IMAGESPRITE_ITEM_SHORT_COUNT_MASK   0x3F
+#define IMAGESPRITE_ITEM_SHORT_COMPACT_MASK 0x40
+#define IMAGESPRITE_ITEM_COUNT_MASK         0x7F
+#define IMAGESPRITE_ITEM_COMPACT_MASK       0x80
+#define IMAGESPRITE_ITEM_EXTENDED_MASK      0xC0
 
 typedef struct BinAssetContent
 {
@@ -68,7 +72,7 @@ typedef struct ImageSprite
     S16                 Y;
     S16                 Width;
     S16                 Height;
-    U8                  Unk04; // TODO
+    U8                  Type;
     U16                 Next;
     IMAGESPRITEPIXEL    Pixels[1];
 } IMAGESPRITE, * IMAGESPRITEPTR;
@@ -83,17 +87,53 @@ typedef struct ImagePaletteSpritePixel
 #pragma pack(pop)
 
 #pragma pack(push, 1)
+typedef struct  ImagePaletteTile
+{
+    U8 Pixels[1];
+} IMAGEPALETTETILE, * IMAGEPALETTETILEPTR;
+#pragma pack(pop)
+
+#pragma pack(push, 1)
 typedef struct ImagePaletteSprite
 {
     S16                     X;
     S16                     Y;
     S16                     Width;
     S16                     Height;
-    U8                      Unk04; // TODO
+    U8                      Type;
     U16                     Next;
     IMAGEPALETTESPRITEPIXEL Pixels[1];
 } IMAGEPALETTESPRITE, * IMAGEPALETTESPRITEPTR;
 #pragma pack(pop)
+
+#pragma pack(push, 1)
+typedef struct ImageSpriteUI
+{
+    ADDR                Offset;
+    U32                 Stride;
+    S32                 X;
+    S32                 Y;
+    S32                 Width;
+    S32                 Height;
+} IMAGESPRITEUI, * IMAGESPRITEUIPTR;
+#pragma pack(pop)
+
+#define ANIMATION_VERSION_0             0
+#define ANIMATION_VERSION_1             1
+#define ANIMATION_VERSION_2             2
+#define ANIMATION_VERSION_3             3
+#define ANIMATION_VERSION_4             4
+#define ANIMATION_VERSION_5             5 /* Bright Animation*/
+#define ANIMATION_VERSION_6             6 /* 16 BPP Animation*/
+#define ANIMATION_VERSION_7             7
+
+#define ANIMATION_HEADER_MAGIC_MASK     0xFF000000
+#define ANIMATION_HEADER_MAGIC_VALUE    0xCA000000
+
+#define IS_ANIMATION(x)                 ((x & ANIMATION_HEADER_MAGIC_MASK) == ANIMATION_HEADER_MAGIC_VALUE)
+#define IS_NOT_ANIMATION(x)             ((x & ANIMATION_HEADER_MAGIC_MASK) != ANIMATION_HEADER_MAGIC_VALUE)
+
+#define IS_ANIMATION_HEADER_FORMAT(x)   (x & 0xFF)
 
 #pragma pack(push, 1)
 typedef struct AnimationSpriteHeader

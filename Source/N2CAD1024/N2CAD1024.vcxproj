@@ -18,69 +18,35 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Action.hxx" />
-    <ClInclude Include="ActionArea.hxx" />
-    <ClInclude Include="App.hxx" />
-    <ClInclude Include="AssetFile.hxx" />
-    <ClInclude Include="BaseFile.hxx" />
-    <ClInclude Include="Basic.hxx" />
-    <ClInclude Include="BinArchive.hxx" />
-    <ClInclude Include="BinAsset.hxx" />
-    <ClInclude Include="BinFile.hxx" />
-    <ClInclude Include="Control.hxx" />
-    <ClInclude Include="ControlCommand.hxx" />
-    <ClInclude Include="DirectDraw.hxx" />
-    <ClInclude Include="DirectInput.hxx" />
-    <ClInclude Include="DirectPlay.hxx" />
-    <ClInclude Include="DirectSound.hxx" />
-    <ClInclude Include="Dossier.hxx" />
-    <ClInclude Include="Game.hxx" />
-    <ClInclude Include="Graphics.Basic.hxx" />
-    <ClInclude Include="Logger.hxx" />
-    <ClInclude Include="Mathematics.Basic.hxx" />
-    <ClInclude Include="Module.hxx" />
-    <ClInclude Include="Native.Basic.hxx" />
-    <ClInclude Include="Player.hxx" />
-    <ClInclude Include="Renderer.Basic.hxx" />
-    <ClInclude Include="RendererModule.Basic.hxx" />
-    <ClInclude Include="RendererModule.Export.hxx" />
-    <ClInclude Include="RendererModule.Import.hxx" />
-    <ClInclude Include="Sound.hxx" />
-    <ClInclude Include="Strings.hxx" />
-    <ClInclude Include="VisualModule.Export.hxx" />
-    <ClInclude Include="VisualModule.Import.hxx" />
-    <ClInclude Include="Window.hxx" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7baf664f-2d4e-4d8a-8dbb-80df9f50ef5a}</ProjectGuid>
-    <RootNamespace>WSX</RootNamespace>
+    <ProjectGuid>{a8dc19e3-63c7-4b68-976f-fb976e48106a}</ProjectGuid>
+    <RootNamespace>N2CAD1024</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -107,32 +73,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;N2CAD1024_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -140,7 +106,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeaderOutputFile />
-      <DisableSpecificWarnings>4018;4229;4996;6031;6335;6385;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4229;4996;6031;6101;6305;6335;6385;6387;28251</DisableSpecificWarnings>
       <OmitFramePointers>true</OmitFramePointers>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ExceptionHandling>false</ExceptionHandling>
@@ -149,14 +115,17 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ddraw.lib;dxguid.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>Module.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;NOOPTIMIZATION;_WINDOWS;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;N2CAD1024_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -164,7 +133,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeaderOutputFile />
-      <DisableSpecificWarnings>4018;4229;4996;6031;6335;6385;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4229;4996;6031;6101;6305;6335;6385;6387;28251</DisableSpecificWarnings>
       <OmitFramePointers>true</OmitFramePointers>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ExceptionHandling>false</ExceptionHandling>
@@ -175,14 +144,17 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ddraw.lib;dxguid.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>Module.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;N2CAD1024_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -190,7 +162,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeaderOutputFile />
-      <DisableSpecificWarnings>4018;4229;4996;6031;6335;6385;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4229;4996;6031;6101;6305;6335;6385;6387;28251</DisableSpecificWarnings>
       <OmitFramePointers>true</OmitFramePointers>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ExceptionHandling>false</ExceptionHandling>
@@ -199,7 +171,10 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ddraw.lib;dxguid.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>Module.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -208,12 +183,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;NOOPTIMIZATION;_WINDOWS;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;N2CAD1024_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <DisableSpecificWarnings>4018;4229;4996;6031;6335;6385;</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4229;4996;6031;6101;6305;6335;6385;6387;28251</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ExceptionHandling>false</ExceptionHandling>
@@ -224,9 +199,28 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);ddraw.lib;dxguid.lib</AdditionalDependencies>
+      <ModuleDefinitionFile>Module.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cxx" />
+    <ClCompile Include="Module.cxx" />
+    <ClCompile Include="Renderer.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Module.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Module.hxx" />
+    <ClInclude Include="Renderer.hxx" />
+    <ClInclude Include="Resources.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -30,10 +30,10 @@ SOFTWARE.
 
 typedef enum BinArchiveType
 {
-    BINARCHIVETYPE_NONE = 0,
-    BINARCHIVETYPE_FILE = 1,
-    BINARCHIVETYPE_DIRECTORY = 2,
-    BINARCHIVETYPE_FORCE_DWORD = 0x7FFFFFF
+    BINARCHIVETYPE_NONE         = 0,
+    BINARCHIVETYPE_FILE         = 1,
+    BINARCHIVETYPE_DIRECTORY    = 2,
+    BINARCHIVETYPE_FORCE_DWORD  = 0x7FFFFFF
 } BINARCHIVETYPE, * BINARCHIVETYPEPTR;
 
 typedef struct BinArchiveHeader
@@ -53,7 +53,8 @@ typedef struct BinArchive
 {
     BINARCHIVETYPE      Type;
     CHAR                Name[MAX_FILE_NAME_LENGTH];
-    U32* Offsets;
+    U32*                Offsets;
     LPSTR               Names;
+    // TODO
     BINFILE             File;
 } BINARCHIVE, * BINARCHIVEPTR;

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 - 2025 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,34 +22,23 @@ SOFTWARE.
 
 #pragma once
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
+#include "Objects.hxx"
 
-#define VK_NULL                     0
-#define VK_INPUT                    0xFF
+#include <AssetFile.hxx>
 
-#define MAX_WINDOW_TITLE_LENGTH     256
+ASSETFILEPTR CLASSCALL ActivateAssetFile(ASSETFILEPTR self);
+ASSETFILEPTR CLASSCALL DisposeAssetFile(ASSETFILEPTR self);
+ASSETFILEPTR CLASSCALL ReleaseAssetFile(ASSETFILEPTR self, CONST OBJECTRELEASETYPE mode);
+BOOL CLASSCALL IsAssetFileActive(ASSETFILEPTR self);
+BOOL CLASSCALL OpenAssetFile(ASSETFILEPTR self, LPCSTR name);
+S32 CLASSCALL AcquireAssetFileOffset(ASSETFILEPTR self);
+S32 CLASSCALL AcquireAssetFileSize(ASSETFILEPTR self);
+S32 CLASSCALL AcquireAssetFileString(ASSETFILEPTR self, LPSTR content, CONST U32 length);
+S32 CLASSCALL SelectAssetFileOffset(ASSETFILEPTR self, LONG distance, DWORD method);
+U32 CLASSCALL AssetFileUnk05(ASSETFILEPTR self); // TODO
+U32 CLASSCALL AssetFileUnk06(ASSETFILEPTR self); // TODO
+VOID CLASSCALL CloseAssetFile(ASSETFILEPTR self);
 
-typedef enum WindowInputState
-{
-    WINDOWINPUTSTATE_NONE               = 0,
-    WINDOWINPUTSTATE_ACCEPT_MOUSE       = 1,
-    WINDOWINPUTSTATE_ACCEPT_KEYBOARD    = 2,
-    WINDOWINPUTSTATE_FORCE_DWORD        = 0x7FFFFFFF
-} WINDOWINPUTSTATE, * WINDOWINPUTSTATEPTR;
-
-typedef struct Window
-{
-    HINSTANCE   Instance;
-    LPCSTR      Args;
-    HWND        HWND;
-    WNDCLASSA   Class;
-    CHAR        Title[MAX_WINDOW_TITLE_LENGTH];
-    DWORD       Style;
-    S32         X;
-    S32         Y;
-    S32         Width;
-    S32         Height;
-    HMENU       Menu;
-    BOOL        IsActive;
-} WINDOW, * WINDOWPTR;
+BFH AcquireAssetFileIndex(LPCSTR name);
+BOOL IsAssetFileActive(CONST BFH indx);
+BOOL OpenAssetFile(CONST BFH indx);;

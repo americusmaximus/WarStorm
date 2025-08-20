@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,7 @@ SOFTWARE.
 
 #pragma once
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
+#include "BaseFile.hxx"
 
 #define INVALID_BINFILE_VALUE       (-1)
 
@@ -39,16 +38,33 @@ typedef U64 BFH;
 typedef U32 BFH;
 #endif
 
+struct BinFile;
+
+// INHERITANCE: BaseFileSelf
+typedef struct BinFileSelf
+{
+    //TODO
+} BINFILESELF, * BINFILESELFPTR;
+
+// INHERITANCE: BaseFile
 typedef struct BinFile
 {
-    BFH Value;
+    BINFILESELFPTR  Self;
+    BFH             Value;
 } BINFILE, * BINFILEPTR;
+
+typedef struct ZipFile
+{
+    void* Self; // TODO
+    void* Value; // TODO
+} ZIPFILE, * ZIPFILEPTR; // TODO
 
 typedef enum BinFileContentType
 {
     BINFILECONTENTTYPE_NONE         = 0,
     BINFILECONTENTTYPE_FILE         = 1, // Actual file
     BINFILECONTENTTYPE_COMBINED     = 2, // An archive with no data compression
+    BINFILECONTENTTYPE_ZIP          = 3, // Gzip file
     BINFILECONTENTTYPE_COMPRESSED   = 8, // An archive with data compression
     BINFILECONTENTTYPE_FORCE_DWORD  = 0x7FFFFFF
 } BINFILECONTENTTYPE, * BINFILECONTENTTYPEPTR;
@@ -58,11 +74,13 @@ typedef struct BinFileContent
     LPSTR               Name;
     BINFILECONTENTTYPE  Type;
     U32                 Archive;
-    BINFILE             File;
+    BFH                 Value;
     U32                 Size;
     U32                 Chunk;
     U32                 Offset;
     BOOL                IsActive;
+    ZIPFILE             Zip;
+    BINFILE             File;
 } BINFILECONTENT, * BINFILECONTENTPTR;
 
 typedef struct BinFileInfo

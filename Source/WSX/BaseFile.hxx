@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 - 2025 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,31 +25,16 @@ SOFTWARE.
 #include "Basic.hxx"
 #include "Native.Basic.hxx"
 
-#define VK_NULL                     0
-#define VK_INPUT                    0xFF
+struct BaseFile;
 
-#define MAX_WINDOW_TITLE_LENGTH     256
+// TODO
 
-typedef enum WindowInputState
+typedef struct BaseFileSelf
 {
-    WINDOWINPUTSTATE_NONE               = 0,
-    WINDOWINPUTSTATE_ACCEPT_MOUSE       = 1,
-    WINDOWINPUTSTATE_ACCEPT_KEYBOARD    = 2,
-    WINDOWINPUTSTATE_FORCE_DWORD        = 0x7FFFFFFF
-} WINDOWINPUTSTATE, * WINDOWINPUTSTATEPTR;
+    // TODO
+} BASEFILESELF, * BASEFILESELFPTR;
 
-typedef struct Window
+typedef struct BaseFile
 {
-    HINSTANCE   Instance;
-    LPCSTR      Args;
-    HWND        HWND;
-    WNDCLASSA   Class;
-    CHAR        Title[MAX_WINDOW_TITLE_LENGTH];
-    DWORD       Style;
-    S32         X;
-    S32         Y;
-    S32         Width;
-    S32         Height;
-    HMENU       Menu;
-    BOOL        IsActive;
-} WINDOW, * WINDOWPTR;
+    BASEFILESELFPTR    Self;
+} BASEFILE, * BASEFILEPTR;
