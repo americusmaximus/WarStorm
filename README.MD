@@ -1,5 +1,5 @@
 # War Storm
-![War Action](./Extras/LogoMedium.png)
+![War Storm](./Extras/LogoMedium.png)
 
 ## Project
 War Storm is an open source implementation of Fireglow Games' [Sudden Strike II](https://en.wikipedia.org/wiki/Sudden_Strike_2) from 2002, with the 2.2 patch.
