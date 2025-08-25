@@ -20,14 +20,120 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Action.hxx"
 #include "Activate.hxx"
 #include "Assets.hxx"
 #include "BinArchive.hxx"
 #include "BinFile.hxx"
 #include "BinFileContent.hxx"
+#include "Input.hxx"
 #include "ZipFile.hxx"
 
 #include <stdlib.h>
+
+// 0x10075fd0
+VOID ActivateInputInitializeState()
+{
+    ActivateInputInitialize();
+    ActivateReleaseInputInitialize();
+}
+
+// 0x10075fe0
+VOID ActivateInputInitialize()
+{
+    InitializeActionHandler(&InputState.Initialize,
+        &ActionState.Initialize, INPUT_ACTION_HANDLER_PRIORITY, InitializeDirectInputAction);
+}
+
+// 0x10076000
+VOID ActivateReleaseInputInitialize()
+{
+    atexit(ReleaseInputInitializeAction);
+}
+
+// 0x10076010
+VOID ReleaseInputInitializeAction()
+{
+    ReleaseActionHandler(&InputState.Initialize);
+}
+
+// 0x10076020
+VOID ActivateInputExecuteState()
+{
+    ActivateInputExecute();
+    ActivateReleaseInputExecute();
+}
+
+// 0x10076030
+VOID ActivateInputExecute()
+{
+    InitializeActionHandler(&InputState.Execute,
+        &ActionState.Execute, INPUT_ACTION_HANDLER_PRIORITY, AcquireDirectInputAction);
+}
+
+// 0x10076050
+VOID ActivateReleaseInputExecute()
+{
+    atexit(ReleaseInputExecuteAction);
+}
+
+// 0x10076060
+VOID ReleaseInputExecuteAction()
+{
+    ReleaseActionHandler(&InputState.Execute);
+}
+
+// 0x10076070
+VOID ActivateInputReleaseState()
+{
+    ActivateInputRelease();
+    ActivateReleaseInputRelease();
+}
+
+// 0x100760a0
+VOID ActivateReleaseInputRelease()
+{
+    atexit(ReleaseInputReleaseAction);
+}
+
+// 0x100760b0
+VOID ReleaseInputReleaseAction()
+{
+    ReleaseActionHandler(&InputState.Release);
+}
+
+// 0x10076080
+VOID ActivateInputRelease()
+{
+    InitializeActionHandler(&InputState.Release,
+        &ActionState.Release, INPUT_ACTION_HANDLER_PRIORITY, ReleaseDirectInputAction);
+}
+
+// 0x100760c0
+VOID ActivateInputMessageState()
+{
+    ActivateInputMessage();
+    ActivateReleaseInputMessage();
+}
+
+// 0x100760d0
+VOID ActivateInputMessage()
+{
+    InitializeActionHandler(&InputState.Message,
+        &ActionState.Message, INPUT_ACTION_HANDLER_PRIORITY, (ACTIONHANDLERLAMBDA)InputMessageAction);
+}
+
+// 0x100760f0
+VOID ActivateReleaseInputMessage()
+{
+    atexit(ReleaseInputMessageAction);
+}
+
+// 0x10076100
+VOID ReleaseInputMessageAction()
+{
+    ReleaseActionHandler(&InputState.Message);
+}
 
 // 0x10076540
 VOID ActivateBinFilesState()
@@ -226,10 +332,10 @@ VOID Activate()
     ActivateBinFileFolder();
     // TODO thunk_FUN_100750c0();
     // TODO thunk_FUN_100754d0();
-    // TODO FUN_10075fd0();
-    // TODO FUN_10076020();
-    // TODO FUN_10076070();
-    // TODO FUN_100760c0();
+    ActivateInputInitializeState();
+    ActivateInputExecuteState();
+    ActivateInputReleaseState();
+    ActivateInputMessageState();
     ActivateBinFilesState();
     ActivateBinArchiveState();
     // TODO thunk_FUN_10077450();

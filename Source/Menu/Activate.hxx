@@ -29,6 +29,26 @@ VOID Activate();
 typedef LPVOID(*CLASSCALL ACTIVATEACTION)(LPVOID self);
 typedef LPVOID(*CLASSCALL RELEASEACTION)(LPVOID self);
 
+VOID ActivateInputInitializeState();
+VOID ActivateInputInitialize();
+VOID ActivateReleaseInputInitialize();
+VOID ReleaseInputInitializeAction();
+
+VOID ActivateInputExecuteState();
+VOID ActivateInputExecute();
+VOID ActivateReleaseInputExecute();
+VOID ReleaseInputExecuteAction();
+
+VOID ActivateInputReleaseState();
+VOID ActivateInputRelease();
+VOID ActivateReleaseInputRelease();
+VOID ReleaseInputReleaseAction();
+
+VOID ActivateInputMessageState();
+VOID ActivateInputMessage();
+VOID ActivateReleaseInputMessage();
+VOID ReleaseInputMessageAction();
+
 VOID ActivateBinFilesState();
 VOID ActivateBinFiles();
 VOID ReleaseBinFiles();

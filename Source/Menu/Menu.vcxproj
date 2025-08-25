@@ -32,8 +32,10 @@
     <ClInclude Include="Control.hxx" />
     <ClInclude Include="ControlCommand.hxx" />
     <ClInclude Include="Cursor.hxx" />
+    <ClInclude Include="DirectInput.hxx" />
     <ClInclude Include="Dossier.hxx" />
     <ClInclude Include="BinFileContent.hxx" />
+    <ClInclude Include="Input.hxx" />
     <ClInclude Include="Logger.hxx" />
     <ClInclude Include="Resources.hxx" />
     <ClInclude Include="Shortcuts.hxx" />
@@ -61,6 +63,7 @@
     <ClCompile Include="ControlCommand.cxx" />
     <ClCompile Include="Cursor.cxx" />
     <ClCompile Include="Dossier.cxx" />
+    <ClCompile Include="Input.cxx" />
     <ClCompile Include="Logger.cxx" />
     <ClCompile Include="Main.cxx" />
     <ClCompile Include="Module.cxx" />
