@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 - 2025 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,30 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#pragma once
+
 #include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
 
-struct Logger;
-
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
-
-typedef struct LoggerSelf
-{
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
-
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+U32 AcquireAnsiString(LPSTR result, U32 length, LPCSTR value, S32 limit);

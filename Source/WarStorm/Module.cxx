@@ -157,7 +157,7 @@ BOOL AcquireStartArguments(LPCSTR name, LPSTR value, CONST U32 length)
             {
                 current++;
 
-                strncpy(value, current, Min<size_t>(length, strlen(current) + 1));
+                strncpy(value, current, Min<ADDR>(length, strlen(current) + 1));
 
                 return TRUE;
             }

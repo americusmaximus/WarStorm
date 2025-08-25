@@ -19,23 +19,57 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.hxx" />
+    <ClInclude Include="ActionArea.hxx" />
+    <ClInclude Include="Activate.hxx" />
     <ClInclude Include="AssetFile.hxx" />
     <ClInclude Include="Assets.hxx" />
+    <ClInclude Include="BaseFile.hxx" />
     <ClInclude Include="Basic.hxx" />
+    <ClInclude Include="BinArchive.hxx" />
+    <ClInclude Include="BinFile.hxx" />
+    <ClInclude Include="Bink.hxx" />
     <ClInclude Include="Control.hxx" />
+    <ClInclude Include="ControlCommand.hxx" />
+    <ClInclude Include="Cursor.hxx" />
     <ClInclude Include="Dossier.hxx" />
-    <ClInclude Include="Objects.hxx" />
+    <ClInclude Include="BinFileContent.hxx" />
+    <ClInclude Include="Logger.hxx" />
     <ClInclude Include="Resources.hxx" />
     <ClInclude Include="Shortcuts.hxx" />
+    <ClInclude Include="State.hxx" />
+    <ClInclude Include="Strings.hxx" />
+    <ClInclude Include="Version.hxx" />
+    <ClInclude Include="Video.hxx" />
+    <ClInclude Include="Window.hxx" />
+    <ClInclude Include="ZipFile.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cxx" />
+    <ClCompile Include="ActionArea.cxx" />
+    <ClCompile Include="Activate.cxx" />
     <ClCompile Include="AssetFile.cxx" />
     <ClCompile Include="Assets.cxx" />
+    <ClCompile Include="BaseFile.cxx" />
+    <ClCompile Include="BinArchive.cxx" />
+    <ClCompile Include="BinFile.cxx" />
+    <ClCompile Include="BinFileContent.cxx" />
+    <ClCompile Include="Bink.cxx" />
+    <ClCompile Include="ControlCommand.cxx" />
+    <ClCompile Include="Cursor.cxx" />
     <ClCompile Include="Dossier.cxx" />
+    <ClCompile Include="Logger.cxx" />
+    <ClCompile Include="Main.cxx" />
+    <ClCompile Include="Module.cxx" />
     <ClCompile Include="Shortcuts.cxx" />
+    <ClCompile Include="State.cxx" />
+    <ClCompile Include="Strings.cxx" />
+    <ClCompile Include="Video.cxx" />
+    <ClCompile Include="Window.cxx" />
+    <ClCompile Include="ZipFile.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\winmm\winmm.vcxproj">
@@ -47,6 +81,9 @@
     <ProjectReference Include="..\zlib\zlib.vcxproj">
       <Project>{e2ff48ba-a783-4302-9ecb-7e0be7334c9b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Module.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -60,27 +97,27 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -103,25 +140,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib;</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib;</IncludePath>
     <TargetName>$(ProjectName).x32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib;</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\WSX;..\..\SDK\DX70\Include;..\..\SDK\Yoink\Source\1.5.G;..\..\SDK\zlib;</IncludePath>
     <TargetName>$(ProjectName).x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

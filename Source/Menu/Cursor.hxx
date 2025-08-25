@@ -20,30 +20,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
+#pragma once
 
-struct Logger;
+#include "BinAsset.hxx"
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
+#include <Renderer.Basic.hxx>
 
-typedef struct LoggerSelf
+typedef struct Cursor
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    ANIMATIONSPRITEHEADERPTR    Animation;
+    PIXEL* Palette;
+    U32                         Width;
+    U32                         Height;
+    PIXEL* Pixels;
+} CURSOR, * CURSORPTR;
 
-typedef struct Logger
+typedef struct CursorStateModuleContainer
 {
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+    CURSOR  Cursor; // TODO
+
+    S32     X;      // 0x100b5f2c
+    S32     Y;      // 0x100b5f30
+    BOOL    IsLeft; // 0x100b5f34
+    BOOL    IsRight;// 0x100b5f38
+} CURSORSTATEMODULECONTAINER, * CURSORSTATEMODULECONTAINERPTR;
+
+EXTERN CURSORSTATEMODULECONTAINER CursorState;
+
+VOID CursorMessageHandler(U32 action);
+VOID SelectCursorCoordinates(S32 ox, S32 oy, S32 nx, S32 ny);

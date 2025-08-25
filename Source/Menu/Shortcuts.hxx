@@ -35,4 +35,4 @@ EXTERN SHORTCUTS Shortcuts;
 
 VOID CLASSCALL InitializeShortcuts(SHORTCUTSPTR self);
 
-U32 CLASSCALL AcquireShortcut(SHORTCUTSPTR self, CONST U32 action);
+U32 CLASSCALL AcquireShortcut(SHORTCUTSPTR self, U32 action);

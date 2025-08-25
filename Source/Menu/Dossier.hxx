@@ -26,4 +26,4 @@ SOFTWARE.
 
 DOSSIERPTR ActivateDossier(DOSSIERPTR self);
 VOID InitializeDossier(DOSSIERPTR self, LPCSTR value);
-DOSSIERCATEGORY AcquireDossierCategory(DOSSIERPTR self, CONST CHAR value);
+DOSSIERCATEGORY AcquireDossierCategory(DOSSIERPTR self, CHAR value);

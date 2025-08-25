@@ -24,9 +24,20 @@ SOFTWARE.
 
 #include "Basic.hxx"
 
-typedef enum ObjectReleaseType
-{
-    OBJECTRELEASETYPE_STACK         = 0,
-    OBJECTRELEASETYPE_ALLOCATED     = 1,
-    OBJECTRELEASETYPE_FORCE_DWORD = 0x7FFFFFF
-} OBJECTRELEASETYPE, * OBJECTRELEASETYPEPTR;
+VOID Activate();
+
+typedef LPVOID(*CLASSCALL ACTIVATEACTION)(LPVOID self);
+typedef LPVOID(*CLASSCALL RELEASEACTION)(LPVOID self);
+
+VOID ActivateBinFilesState();
+VOID ActivateBinFiles();
+VOID ReleaseBinFiles();
+VOID ReleaseBinFilesAction();
+
+VOID ActivateBinArchiveState();
+VOID ActivateBinArchives();
+VOID ReleaseBinArchives();
+VOID ReleaseBinArchivesAction();
+
+VOID ActivateItems(LPVOID pointer, U32 size, U32 count, ACTIVATEACTION action);
+VOID ReleaseItems(LPVOID pointer, U32 size, U32 count, RELEASEACTION action);

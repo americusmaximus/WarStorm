@@ -20,30 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#pragma once
+
 #include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
 
-struct Logger;
+#include <ActionArea.hxx>
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
-
-typedef struct LoggerSelf
+typedef struct ActionAreaStateModuleContainer
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    ACTIONAREAPTR   Items;  // 0x100b6f44
+} ACTIONAREASTATEMODULECONTAINER, * ACTIONAREASTATEMODULECONTAINERPTR;
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+EXTERN ACTIONAREASTATEMODULECONTAINER ActionAreaState;

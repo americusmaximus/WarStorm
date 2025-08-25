@@ -23,6 +23,7 @@ SOFTWARE.
 #pragma once
 
 #include "BinArchive.hxx"
+#include "BinFileContent.hxx"
 
 #define MAX_BINARY_ARCHIVE_COUNT    16
 #define MAX_BINARY_CHUNK_COUNT      8
@@ -32,6 +33,26 @@ typedef struct AssetStateModuleContainer
 {
     BINARCHIVE          Archives[MAX_BINARY_ARCHIVE_COUNT]; // 0x100b7258
     BINFILECONTENT      Files[MAX_BINARY_FILE_COUNT];       // 0x100b93d8
+    struct
+    {
+        U32             Count;                              // 0x100b71d0
+        BINFILECHUNK    Values[MAX_BINARY_CHUNK_COUNT];     // 0x100b71d8
+    } Chunks;
 } ASSETSTATEMODULECONTAINER, * ASSETSTATEMODULECONTAINERPTR;
 
 EXTERN ASSETSTATEMODULECONTAINER AssetsState;
+
+BFH AcquireAssetFileIndex(LPCSTR name);
+BOOL IsAssetFileActive(BFH indx);
+BOOL OpenAssetFile(BFH indx);
+LPVOID AcquireBinFileChunk(BFH indx, U32 chunk);
+LPVOID InitializeBinFileChunk(BFH indx, U32 chunk, U32 size);
+LPVOID ReadAssetFileChunk(BFH indx, U32 chunk);
+S32 AcquireAssetFileOffset(BFH indx);
+S32 AcquireAssetFileSize(BFH indx);
+S32 SelectAssetFileOffset(BFH indx, S32 distance, DWORD method);
+U32 AcquireBinFileChunkSize(BFH indx, U32 offset);
+U32 ReadAssetFile(BFH indx, LPVOID content, U32 size);
+U32 ReadAssetFileMultiChunk(LPVOID result, BFH indx, U32 offset, U32 size);
+U32 ReadAssetFileSingleChunk(LPVOID result, BFH indx, U32 offset, U32 size);
+VOID CloseAssetFile(BFH indx);

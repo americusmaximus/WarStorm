@@ -20,30 +20,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
+#pragma once
 
-struct Logger;
+#include "Window.hxx"
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
+#include <App.hxx>
 
-typedef struct LoggerSelf
+typedef struct StateModuleContainer
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    APPPTR                          App;                            // 0x100b46c0
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+    struct
+    {
+        LPSTR                       All;                            // TODO
+        LPSTR*                      Args;                           // TODO
+        U32                         Count;                          // TODO
+    } Arguments;
+
+    BOOL IsIniActive;                                               // TODO
+
+    MODULEPTR                       Module;                         // TODO
+    RENDERERPTR                     Renderer;                       // TODO
+    WINDOWPTR                       Window;                         // 0x100b71c8
+    LOGGERPTR                       Logger;                         // 0x100b71cc
+
+    CHAR                            Name[MAX_PLAYER_NAME_LENGTH];   // TODO
+} STATEMODULECONTAINER, * STATEMODULECONTAINERPTR;
+
+EXTERN STATEMODULECONTAINER State;

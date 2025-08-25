@@ -20,30 +20,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#pragma once
+
 #include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
 
-struct Logger;
+#include <Bink.h>
+#include <RendererModule.Basic.hxx>
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
-
-typedef struct LoggerSelf
+typedef struct VideStateModuleContainer
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    BOOL                            IsActive;   // 0x1009f420
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+    HBINK                           Instance;   // 0x1009f4ec
+    S32                             Surface;    // 0x1009f4f0
+
+    RENDERERPTR                     Renderer;   // 0x1009f474
+    U32                             MaxFrames;  // 0x1009f478
+} VIDESTATEMODULECONTAINER, * VIDESTATEMODULECONTAINERPTR;
+
+EXTERN VIDESTATEMODULECONTAINER VideoState;

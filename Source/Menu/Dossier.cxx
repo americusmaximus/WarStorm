@@ -97,7 +97,7 @@ VOID InitializeDossier(DOSSIERPTR self, LPCSTR value)
 }
 
 // 0x100785a0
-DOSSIERCATEGORY AcquireDossierCategory(DOSSIERPTR self, CONST CHAR value)
+DOSSIERCATEGORY AcquireDossierCategory(DOSSIERPTR self, CHAR value)
 {
     if (value == NULL)
     {

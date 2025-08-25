@@ -24,26 +24,24 @@ SOFTWARE.
 
 #include "BinFile.hxx"
 
-#define INVALID_ASSET_FILE_OFFSET           (-1)
-#define INVALID_ASSET_FILE_SIZE             (-1)
-#define INVALID_ASSET_FILE_STRING_LENGTH    (-1)
-
 struct AssetFile;
 
 typedef AssetFile* (CLASSCALL* ASSETFILERELEASEACTION)(AssetFile* self, CONST OBJECTRELEASETYPE mode);
 typedef BOOL(CLASSCALL* ASSETFILEISACTIOVEACTION)(AssetFile* self);
-typedef BOOL(CLASSCALL* ASSETFILEOPENACTION)(AssetFile* self, LPCSTR name);
+typedef BOOL(CLASSCALL* ASSETFILEOPENACTION)(AssetFile* self, LPCSTR name, U32 type);
 typedef VOID(CLASSCALL* ASSETFILECLOSEACTION)(AssetFile* self);
 typedef U32(CLASSCALL* ASSETFILEREADACTION)(AssetFile* self, LPVOID content, U32 size);
-typedef U32(CLASSCALL* ASSETFILEUNKNOWN5ACTION)(AssetFile* self); // TODO
-typedef U32(CLASSCALL* ASSETFILEUNKNOWN6ACTION)(AssetFile* self); // TODO
-typedef S32(CLASSCALL* ASSETFILESELECTOFFSETACTION)(AssetFile* self, LONG distance, DWORD method);
-typedef S32(CLASSCALL* ASSETFILEACQUIREOFFSETACTION)(AssetFile* self);
-typedef S32(CLASSCALL* ASSETFILEACQUIRESIZEACTION)(AssetFile* self);
-typedef S32(CLASSCALL* ASSETFILEACQUIRESTRINGACTION)(AssetFile* self, LPSTR content, CONST U32 length);
-// TODO
+typedef U32(CLASSCALL* ASSETFILEWRITEACTION)(AssetFile* self, LPVOID content, U32 size);
+typedef BOOL(CLASSCALL* ASSETFILEFLUSHACTION)(AssetFile* self);
+typedef S32(CLASSCALL* ASSETFILESETPOINTERACTION)(AssetFile* self, S32 distance, U32 method);
+typedef S32(CLASSCALL* ASSETFILEGETPOINTERACTION)(AssetFile* self);
+typedef S32(CLASSCALL* ASSETFILEGETSIZEACTION)(AssetFile* self);
+typedef U32(CLASSCALL* ASSETFILEGETSTRINGACTION)(AssetFile* self, LPSTR string, U32 length);
+typedef U32(CDECLAPI* ASSETFILESETSTRINGACTION)(AssetFile* self, LPSTR format, ...);
+typedef LPVOID(CLASSCALL* ASSETFILEUNKNOWN12ACTION)(AssetFile* self); // TODO
 
 // INHERITANCE: BaseFileSelf
+#pragma pack(push, 1)
 typedef struct AssetFileSelf
 {
     ASSETFILERELEASEACTION          Release;
@@ -51,18 +49,22 @@ typedef struct AssetFileSelf
     ASSETFILEOPENACTION             Open;
     ASSETFILECLOSEACTION            Close;
     ASSETFILEREADACTION             Read;
-    ASSETFILEUNKNOWN5ACTION         Unk05; // TODO
-    ASSETFILEUNKNOWN6ACTION         Unk06; // TODO
-    ASSETFILESELECTOFFSETACTION     SelectOffset;
-    ASSETFILEACQUIREOFFSETACTION    AcquireOffset;
-    ASSETFILEACQUIRESIZEACTION      AcquireSize;
-    ASSETFILEACQUIRESTRINGACTION    AcquireString;
-    // TODO
+    ASSETFILEWRITEACTION            Write;
+    ASSETFILEFLUSHACTION            Flush;
+    ASSETFILESETPOINTERACTION       SetPointer;
+    ASSETFILEGETPOINTERACTION       GetPointer;
+    ASSETFILEGETSIZEACTION          GetSize;
+    ASSETFILEGETSTRINGACTION        GetString;
+    ASSETFILESETSTRINGACTION        SetString;
+    ASSETFILEUNKNOWN12ACTION        Unk12;      // TODO
 } ASSETFILESELF, * ASSETFILESELFPTR;
+#pragma pack(pop)
 
 // INHERITANCE: BaseFile
+#pragma pack(push, 1)
 typedef struct AssetFile
 {
     ASSETFILESELFPTR    Self;
     BFH                 Value;
 } ASSETFILE, * ASSETFILEPTR;
+#pragma pack(pop)

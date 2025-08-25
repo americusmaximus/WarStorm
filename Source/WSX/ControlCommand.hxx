@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Americus Maximus
+Copyright (c) 2024 - 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,7 @@ typedef struct ControlCommand
 #define CONTROLCOMMAND_VIDEO            0x236D6C74 /* #mlt */
 #define CONTROLCOMMAND_KBD              0x2f4b4244 /* /KBD */
 #define CONTROLCOMMAND_UTF              0x2F555446 /* /UTF */
+#define CONTROLCOMMAND_TIMER            0x2F54494D /* /TIM */
 
 #define CONTROLCOMMANDACTION_NONE                           0x0000
 #define CONTROLCOMMANDACTION_MOUSE_HOVER                    0x0001

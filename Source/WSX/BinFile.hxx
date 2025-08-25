@@ -26,10 +26,6 @@ SOFTWARE.
 
 #define INVALID_BINFILE_VALUE       (-1)
 
-#define BINFILEOPENTYPE_READ        0x0
-#define BINFILEOPENTYPE_WRITE       0x1
-#define BINFILEOPENTYPE_CREATE      0x2
-
 #define BINFILEHANDLE(x) ((HANDLE)x)
 
 #ifdef _WIN64
@@ -39,63 +35,103 @@ typedef U32 BFH;
 #endif
 
 struct BinFile;
+struct BinFileFinder;
+struct BinFileFolder;
+
+typedef BinFile* (CLASSCALL* BINFILERELEASEACTION)(BinFile* self, CONST OBJECTRELEASETYPE mode);
+typedef BOOL(CLASSCALL* BINFILEISACTIOVEACTION)(BinFile* self);
+typedef BOOL(CLASSCALL* BINFILEOPENACTION)(BinFile* self, LPCSTR name, U32 type);
+typedef VOID(CLASSCALL* BINFILECLOSEACTION)(BinFile* self);
+typedef U32(CLASSCALL* BINFILEREADACTION)(BinFile* self, LPVOID content, U32 size);
+typedef U32(CLASSCALL* BINFILEWRITEACTION)(BinFile* self, LPVOID content, U32 size);
+typedef BOOL(CLASSCALL* BINFILEFLUSHACTION)(BinFile* self);
+typedef S32(CLASSCALL* BINFILESETPOINTERACTION)(BinFile* self, S32 distance, U32 method);
+typedef S32(CLASSCALL* BINFILEGETPOINTERACTION)(BinFile* self);
+typedef S32(CLASSCALL* BINFILEGETSIZEACTION)(BinFile* self);
+typedef U32(CLASSCALL* BINFILEGETSTRINGACTION)(BinFile* self, LPSTR string, U32 length);
+typedef U32(CDECLAPI* BINFILESETSTRINGACTION)(BinFile* self, LPSTR format, ...);
+typedef BinFileFolder*(CLASSCALL* BINFILEGETFOLDERACTION)(BinFile* self);
 
 // INHERITANCE: BaseFileSelf
+#pragma pack(push, 1)
 typedef struct BinFileSelf
 {
-    //TODO
+    BINFILERELEASEACTION            Release;
+    BINFILEISACTIOVEACTION          IsActive;
+    BINFILEOPENACTION               Open;
+    BINFILECLOSEACTION              Close;
+    BINFILEREADACTION               Read;
+    BINFILEWRITEACTION              Write;
+    BINFILEFLUSHACTION              Flush;
+    BINFILESETPOINTERACTION         SetPointer;
+    BINFILEGETPOINTERACTION         GetPointer;
+    BINFILEGETSIZEACTION            GetSize;
+    BINFILEGETSTRINGACTION          GetString;
+    BINFILESETSTRINGACTION          SetString;
+    BINFILEGETFOLDERACTION          GetFolder;
 } BINFILESELF, * BINFILESELFPTR;
+#pragma pack(pop)
 
 // INHERITANCE: BaseFile
+#pragma pack(push, 1)
 typedef struct BinFile
 {
     BINFILESELFPTR  Self;
     BFH             Value;
 } BINFILE, * BINFILEPTR;
+#pragma pack(pop)
 
-typedef struct ZipFile
-{
-    void* Self; // TODO
-    void* Value; // TODO
-} ZIPFILE, * ZIPFILEPTR; // TODO
+typedef BinFile* (CLASSCALL* BINFILEFOLDERGETFILEACTION)(BinFileFolder* self);
+typedef BinFileFinder* (CLASSCALL* BINFILEFOLDERGETFILEFINDERACTION)(BinFileFolder* self);
+typedef BOOL(CLASSCALL* BINFILEFOLDERCREATEFOLDERACTION)(BinFileFolder* self, LPCSTR name);
 
-typedef enum BinFileContentType
+// INHERITANCE: BaseFileFolderSelf
+#pragma pack(push, 1)
+typedef struct BinFileFolderSelf
 {
-    BINFILECONTENTTYPE_NONE         = 0,
-    BINFILECONTENTTYPE_FILE         = 1, // Actual file
-    BINFILECONTENTTYPE_COMBINED     = 2, // An archive with no data compression
-    BINFILECONTENTTYPE_ZIP          = 3, // Gzip file
-    BINFILECONTENTTYPE_COMPRESSED   = 8, // An archive with data compression
-    BINFILECONTENTTYPE_FORCE_DWORD  = 0x7FFFFFF
-} BINFILECONTENTTYPE, * BINFILECONTENTTYPEPTR;
+    BINFILEFOLDERGETFILEACTION          GetFile;
+    BINFILEFOLDERGETFILEFINDERACTION    GetFileFinder;
+    BINFILEFOLDERCREATEFOLDERACTION     CreateFolder;
+} BINFILEFOLDERSELF, * BINFILEFOLDERSELFPTR;
+#pragma pack(pop)
 
-typedef struct BinFileContent
+// INHERITANCE: BaseFileFolder
+#pragma pack(push, 1)
+typedef struct BinFileFolder
 {
-    LPSTR               Name;
-    BINFILECONTENTTYPE  Type;
-    U32                 Archive;
-    BFH                 Value;
-    U32                 Size;
-    U32                 Chunk;
-    U32                 Offset;
-    BOOL                IsActive;
-    ZIPFILE             Zip;
-    BINFILE             File;
-} BINFILECONTENT, * BINFILECONTENTPTR;
+    BINFILEFOLDERSELFPTR Self;
+} BINFILEFOLDER, * BINFILEFOLDERPTR;
+#pragma pack(pop)
 
-typedef struct BinFileInfo
-{
-    U32                 Name;
-    BINFILECONTENTTYPE  Type;
-    U32                 Index;
-    U32                 Size;
-    U32                 Chunk;
-} BINFILEINFO, * BINFILEINFOPTR;
+typedef BinFileFinder* (CLASSCALL* BINFILEFINDERRELEASEACTION)(BinFileFinder* self, CONST OBJECTRELEASETYPE mode);
+typedef BOOL(CLASSCALL* BINFILEFINDEROPENACTION)(BinFileFinder* self, LPCSTR path);
+typedef VOID(CLASSCALL* BINFILEFINDERCLOSEACTION)(BinFileFinder* self);
+typedef BOOL(CLASSCALL* BINFILEFINDERNEXTACTION)(BinFileFinder* self);
+typedef LPCSTR(CLASSCALL* BINFILEFINDERGETNAMEACTION)(BinFileFinder* self);
+typedef DWORD(CLASSCALL* BINFILEFINDERGETATTRIBUTESACTION)(BinFileFinder* self);
+typedef DWORD(CLASSCALL* BINFILEFINDERGETSIZEACTION)(BinFileFinder* self);
 
-typedef struct BinFileChunk
+// INHERITANCE: BaseFileFinderSelf
+#pragma pack(push, 1)
+typedef struct BinFileFinderSelf
 {
-    BFH                 Index;
-    U32                 Chunk;
-    U32                 Size;
-    LPVOID              Content;
-} BINFILECHUNK, * BINFILECHUNKPTR;
+    BINFILEFINDERRELEASEACTION          Release;
+    BINFILEFINDEROPENACTION             Open;
+    BINFILEFINDERCLOSEACTION            Close;
+    BINFILEFINDERNEXTACTION             Next;
+    BINFILEFINDERGETNAMEACTION          GetName;
+    BINFILEFINDERGETATTRIBUTESACTION    GetAttributes;
+    BINFILEFINDERGETSIZEACTION          GetSize;
+} BINFILEFINDERSELF, * BINFILEFINDERSELFPTR;
+#pragma pack(pop)
+
+// INHERITANCE: BaseFileFinder
+#pragma pack(push, 1)
+typedef struct BinFileFinder
+{
+    BINFILEFINDERSELFPTR    Self;
+    U8                      IsActive;
+    HANDLE                  Handle;
+    WIN32_FIND_DATAA        Data;
+} BINFILEFINDER, * BINFILEFINDERPTR;
+#pragma pack(pop)

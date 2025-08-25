@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 - 2025 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,30 +20,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
+#include "BinFile.hxx"
+#include "BinFileContent.hxx"
+#include "ZipFile.hxx"
 
-struct Logger;
-
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
-
-typedef struct LoggerSelf
+// 0x100765a0
+BINFILECONTENTPTR CLASSCALL BinFileContentActivate(BINFILECONTENTPTR self)
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    ZipFileActivate(&self->Zip);
 
-typedef struct Logger
+    BinFileActivate(&self->File);
+
+    return self;
+}
+
+// 0x100765f0
+BINFILECONTENTPTR CLASSCALL BinFileContentRelease(BINFILECONTENTPTR self)
 {
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+    BinFileDispose(&self->File);
+
+    ZipFileDispose(&self->Zip);
+
+    return self;
+}

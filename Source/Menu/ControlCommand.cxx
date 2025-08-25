@@ -20,30 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
+#include "ActionArea.hxx"
+#include "Control.hxx"
+#include "ControlCommand.hxx"
 
-struct Logger;
+CONTROLCOMMANDSTATEMODULECONTAINER CommandControlState;
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
-
-typedef struct LoggerSelf
+// 0x100756f0
+VOID EnqueueControlCommand(U32 command, U32 action, U32 param1, U32 param2)
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    CommandControlState.Items[CommandControlState.WriteIndex].Command = command;
+    CommandControlState.Items[CommandControlState.WriteIndex].Action = action;
+    CommandControlState.Items[CommandControlState.WriteIndex].Parameter1 = param1;
+    CommandControlState.Items[CommandControlState.WriteIndex].Parameter2 = param2;
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+    CommandControlState.WriteIndex = (CommandControlState.WriteIndex + 1) % MAX_CONTROL_COMMAND_ITEMS_COUNT;
+}

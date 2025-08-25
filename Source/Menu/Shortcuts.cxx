@@ -21,6 +21,7 @@ SOFTWARE.
 */
 
 #include "AssetFile.hxx"
+#include "BaseFile.hxx"
 #include "Control.hxx"
 #include "Dossier.hxx"
 #include "Shortcuts.hxx"
@@ -49,7 +50,7 @@ SHORTCUTS Shortcuts;
 // and mapping those to the list of predefined actions (events), so that
 // there is a clear mapping from a numeric action to a numeric key value.
 
-STATIC VOID MakeShortcut(SHORTCUTSPTR self, std::map<std::string, std::string>& names, std::map<std::string, U32>& keys, LPCSTR name, CONST U32 action)
+STATIC VOID MakeShortcut(SHORTCUTSPTR self, std::map<std::string, std::string>& names, std::map<std::string, U32>& keys, LPCSTR name, U32 action)
 {
     std::string shortcut = name;
     if (names.find(shortcut) != names.end())
@@ -69,11 +70,11 @@ VOID CLASSCALL InitializeShortcuts(SHORTCUTSPTR self)
     std::map<std::string, std::string> names;
 
     ASSETFILE file;
-    ActivateAssetFile(&file);
+    AssetFileActivate(&file);
 
-    if (!OpenAssetFile(&file, "shortcuts"))
+    if (!AssetFileOpen(&file, "shortcuts", FILEOPENTYPE_READ))
     {
-        DisposeAssetFile(&file);
+        AssetFileDispose(&file);
 
         return;
     }
@@ -82,7 +83,7 @@ VOID CLASSCALL InitializeShortcuts(SHORTCUTSPTR self)
     ActivateDossier(&dossier);
 
     CHAR content[MAX_SHORTCUT_LENGTH];
-    while (AcquireAssetFileString(&file, content, MAX_SHORTCUT_LENGTH) != INVALID_ASSET_FILE_STRING_LENGTH)
+    while (BaseFileGetString((BASEFILEPTR)&file, content, MAX_SHORTCUT_LENGTH) != INVALID_FILE_STRING_LENGTH)
     {
         InitializeDossier(&dossier, content);
 
@@ -125,7 +126,7 @@ VOID CLASSCALL InitializeShortcuts(SHORTCUTSPTR self)
         }
     }
 
-    CloseAssetFile(&file);
+    AssetFileClose(&file);
 
     MakeShortcut(self, names, keys, "SINGLE0_NEW",             CONTROLACTION_SINGLE0_NEW);
     MakeShortcut(self, names, keys, "SINGLE0_SINGLEMISSIONS",  CONTROLACTION_SINGLE0_SINGLEMISSIONS);
@@ -180,11 +181,11 @@ VOID CLASSCALL InitializeShortcuts(SHORTCUTSPTR self)
     MakeShortcut(self, names, keys, "MSGBOX_CANCEL",           CONTROLACTION_MSGBOX_CANCEL);
     MakeShortcut(self, names, keys, "MSTAT_EXIT",              CONTROLACTION_MSTAT_EXIT);
 
-    DisposeAssetFile(&file);
+    AssetFileDispose(&file);
 }
 
 // TODO
-U32 CLASSCALL AcquireShortcut(SHORTCUTSPTR self, CONST U32 action)
+U32 CLASSCALL AcquireShortcut(SHORTCUTSPTR self, U32 action)
 {
     // TODO NOT IMPLEMENTED
     //if (self->find(action) != self->end()) { return self->operator[](action); }

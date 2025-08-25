@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,45 +23,51 @@ SOFTWARE.
 #pragma once
 
 #include "BinFile.hxx"
+#include "ZipFile.hxx"
 
-#define INVALID_BINARCHIVE_INDEX    (-1)
-
-#define BINARCHIVE_MAGIC            0x53465A46 /* FZFS */
-
-typedef enum BinArchiveType
+typedef enum FileContentType
 {
-    BINARCHIVETYPE_NONE         = 0,
-    BINARCHIVETYPE_FILE         = 1,
-    BINARCHIVETYPE_DIRECTORY    = 2,
-    BINARCHIVETYPE_FORCE_DWORD  = 0x7FFFFFF
-} BINARCHIVETYPE, * BINARCHIVETYPEPTR;
+    FILECONTENTTYPE_NONE            = 0,
+    FILECONTENTTYPE_FILE            = 1, // Actual file
+    FILECONTENTTYPE_COMBINED        = 2, // An archive with no data compression
+    FILECONTENTTYPE_ZIP             = 3, // Gzip file
+    FILECONTENTTYPE_COMPRESSED      = 8, // An archive with data compression
+    FILECONTENTTYPE_FORCE_DWORD     = 0x7FFFFFF
+} FILECONTENTTYPE, * FILECONTENTTYPEPTR;
 
 #pragma pack(push, 1)
-typedef struct BinArchiveHeader
+typedef struct BinFileContent
 {
-    U32                 Magic;
-    U32                 Offset;
-} BINARCHIVEHEADER, * BINARCHIVEHEADERPTR;
-#pragma pack(pop)
-
-#pragma pack(push, 1)
-typedef struct BinArchiveDescriptor
-{
+    LPSTR               Name;
+    FILECONTENTTYPE     Type;
+    U32                 Archive;
+    BFH                 Value;
     U32                 Size;
-    U32                 Count;
-    U32                 Length;
-} BINARCHIVEDESCRIPTOR, * BINARCHIVEDESCRIPTORPTR;
+    U32                 Chunk;
+    U32                 Offset;
+    BOOL                IsActive;
+    ZIPFILE             Zip;
+    BINFILE             File;
+} BINFILECONTENT, * BINFILECONTENTPTR;
 #pragma pack(pop)
 
 #pragma pack(push, 1)
-typedef struct BinArchive
+typedef struct BinFileInfo
 {
-    BINARCHIVETYPE      Type;
-    CHAR                Name[MAX_FILE_NAME_LENGTH];
-    CHAR                Folder[MAX_FILE_NAME_LENGTH];   // TODO Name
-    U32                 Length;                         // TODO Name
-    U32*                Offsets;
-    LPSTR               Names;
-    BINFILE             File;
-} BINARCHIVE, * BINARCHIVEPTR;
+    U32                 Name;
+    FILECONTENTTYPE     Type;
+    U32                 Index;
+    U32                 Size;
+    U32                 Chunk;
+} BINFILEINFO, * BINFILEINFOPTR;
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+typedef struct BinFileChunk
+{
+    BFH                 Index;
+    U32                 Chunk;
+    U32                 Size;
+    LPVOID              Content;
+} BINFILECHUNK, * BINFILECHUNKPTR;
 #pragma pack(pop)

@@ -20,30 +20,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#pragma once
+
 #include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
 
-struct Logger;
+#include <Action.hxx>
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
-
-typedef struct LoggerSelf
+typedef struct ActionStateModuleContainer
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    ACTIONHANDLERPTR Activate;      // 0x100b71b0
+    ACTIONHANDLERPTR Initialize;    // 0x100b71b4
+    ACTIONHANDLERPTR Execute;       // 0x100b71b8
+    ACTIONHANDLERPTR Release;       // 0x100b71bc
+    ACTIONHANDLERPTR Message;       // 0x100b71c0
+    ACTIONHANDLERPTR Active;        // 0x100b71c4
+} ACTIONSTATEMODULECONTAINER, * ACTIONSTATEMODULECONTAINERPTR;
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+EXTERN ACTIONSTATEMODULECONTAINER ActionState;
+
+VOID CLASSCALL ReleaseActionHandler(ACTIONHANDLERPTR self);
+BOOL CLASSCALL ContainsActionHandler(ACTIONHANDLERPTR self, ACTIONHANDLERPTR handler);
+
+VOID InitializeActionHandler(ACTIONHANDLERPTR* destination, U32 priority, ACTIONHANDLERLAMBDA action);
+VOID ReleaseActionHandler(ACTIONHANDLERPTR self, ACTIONHANDLERLAMBDA action);

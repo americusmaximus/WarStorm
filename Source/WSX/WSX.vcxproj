@@ -28,6 +28,7 @@
     <ClInclude Include="BinArchive.hxx" />
     <ClInclude Include="BinAsset.hxx" />
     <ClInclude Include="BinFile.hxx" />
+    <ClInclude Include="BinFileContent.hxx" />
     <ClInclude Include="Control.hxx" />
     <ClInclude Include="ControlCommand.hxx" />
     <ClInclude Include="DirectDraw.hxx" />
@@ -41,6 +42,7 @@
     <ClInclude Include="Mathematics.Basic.hxx" />
     <ClInclude Include="Module.hxx" />
     <ClInclude Include="Native.Basic.hxx" />
+    <ClInclude Include="Objects.hxx" />
     <ClInclude Include="Player.hxx" />
     <ClInclude Include="Renderer.Basic.hxx" />
     <ClInclude Include="RendererModule.Basic.hxx" />
@@ -51,6 +53,7 @@
     <ClInclude Include="VisualModule.Export.hxx" />
     <ClInclude Include="VisualModule.Import.hxx" />
     <ClInclude Include="Window.hxx" />
+    <ClInclude Include="ZipFile.hxx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -108,25 +111,25 @@
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName).x32</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include;..\..\SDK\zlib;</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\x32\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x32\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName).x32</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include;..\..\SDK\zlib;</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName).x64</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include;..\..\SDK\zlib;</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Obj\x64\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName).x64</TargetName>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include</ExternalIncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\SDK\DX70\Include;..\..\SDK\zlib;</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

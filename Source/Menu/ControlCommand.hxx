@@ -20,30 +20,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#pragma once
+
 #include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
 
-struct Logger;
+#include <ControlCommand.hxx>
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
+#define MAX_CONTROL_COMMAND_ITEMS_COUNT 256
 
-typedef struct LoggerSelf
+typedef struct ControlCommandStateModuleContainer
 {
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+    CONTROLCOMMAND  Items[MAX_CONTROL_COMMAND_ITEMS_COUNT]; // 0x100b5f3c
+    S32             WriteIndex;                             // 0x100b6f3c
+    S32             ReadIndex;                              // TODO
+} CONTROLCOMMANDSTATEMODULECONTAINER, * CONTROLCOMMANDSTATEMODULECONTAINERPTR;
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+EXTERN CONTROLCOMMANDSTATEMODULECONTAINER CommandControlState;
+
+BOOL DequeueControlCommand(U32 command);
+BOOL DequeueControlCommand(CONTROLCOMMANDPTR command, BOOL remove);
+CONTROLCOMMANDPTR DequeueControlCommand(BOOL remove);
+VOID EnqueueControlCommand(U32 command, U32 action, U32 param1, U32 param2);

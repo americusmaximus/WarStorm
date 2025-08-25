@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 - 2025 Americus Maximus
+Copyright (c) 2025 Americus Maximus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,30 +20,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Basic.hxx"
-#include "Native.Basic.hxx"
-#include "Objects.hxx"
+#pragma once
 
-struct Logger;
+#include <BaseFile.hxx>
 
-typedef Logger* (CLASSCALL* LOGGERRELEASEACTION)(Logger* self, CONST OBJECTRELEASETYPE mode);
-typedef BOOL(CLASSCALL* LOGGERISACTIVEACTION)(Logger* self);
-typedef VOID(CLASSCALL* LOGGERWRITEACTION)(Logger* self, LPCSTR message, U32 length); // TODO
+BASEFILEPTR CLASSCALL BaseFileRelease(BASEFILEPTR self, CONST OBJECTRELEASETYPE mode);
 
-typedef struct LoggerSelf
-{
-    LOGGERRELEASEACTION     Release;
-    LOGGERISACTIVEACTION    IsActive;
-    LPVOID                  Unk02; // TODO
-    LPVOID                  Unk03; // TODO
-    LPVOID                  Unk04; // TODO
-    LOGGERWRITEACTION       Write;
-} LOGGERSELF, * LOGGERSELFPTR;
+U32 CLASSCALL BaseFileGetString(BASEFILEPTR self, LPSTR content, U32 length);
+U32 CDECLAPI BaseFileSetString(BASEFILEPTR self, LPSTR format, ...);
 
-typedef struct Logger
-{
-    LOGGERSELFPTR   Self;
-    LPVOID          Unk01; // TODO
-    HWND            HWND;
-    HANDLE          Mutex;
-} LOGGER, * LOGGERPTR;
+BASEFILEFINDERPTR CLASSCALL BaseFileFinderRelease(BASEFILEFINDERPTR self, CONST OBJECTRELEASETYPE mode);
+BASEFILEFINDERPTR CLASSCALL BaseFileFinderDispose(BASEFILEFINDERPTR self);
+
+VOID CLASSCALL BaseFileFinderClose(BASEFILEFINDERPTR self);
