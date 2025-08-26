@@ -27,6 +27,7 @@
     <ClInclude Include="BaseFile.hxx" />
     <ClInclude Include="Basic.hxx" />
     <ClInclude Include="BinArchive.hxx" />
+    <ClInclude Include="BinAsset.hxx" />
     <ClInclude Include="BinFile.hxx" />
     <ClInclude Include="Bink.hxx" />
     <ClInclude Include="Control.hxx" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Assets.cxx" />
     <ClCompile Include="BaseFile.cxx" />
     <ClCompile Include="BinArchive.cxx" />
+    <ClCompile Include="BinAsset.cxx" />
     <ClCompile Include="BinFile.cxx" />
     <ClCompile Include="BinFileContent.cxx" />
     <ClCompile Include="Bink.cxx" />

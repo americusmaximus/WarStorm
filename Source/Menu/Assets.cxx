@@ -24,6 +24,7 @@ SOFTWARE.
 #include "Assets.hxx"
 #include "BinFile.hxx"
 #include "BinFileContent.hxx"
+#include "Logger.hxx"
 #include "ZipFile.hxx"
 
 #include <stdlib.h>
@@ -31,6 +32,38 @@ SOFTWARE.
 #define MAX_ASSET_FILE_NAME_LENGTH      1024
 
 ASSETSTATEMODULECONTAINER AssetsState;
+
+// 0x10001ee0
+U32 AcquireAssetContent(LPCSTR name, LPVOID* content, U32 size)
+{
+    ASSETFILE asset;
+    AssetFileActivate(&asset);
+    if (!AssetFileOpen(&asset, name, FILEOPENTYPE_READ))
+    {
+        LogMessage("BFILE : Can't open \"%s\"\n", name);
+
+        if (!DAT_1009f50c)
+        {
+            AssetFileDispose(&asset);
+
+            return FALSE;
+        }
+    }
+
+    CONST U32 length = AssetFileGetSize(&asset);
+
+    if (size == 0)
+    {
+        *content = malloc(length);
+        size = length;
+    }
+
+    AssetFileRead(&asset, *content, size);
+    AssetFileClose(&asset);
+    AssetFileDispose(&asset);
+
+    return size;
+}
 
 // 0x100766f0
 LPVOID InitializeBinFileChunk(BFH indx, U32 chunk, U32 size)

@@ -23,6 +23,7 @@ SOFTWARE.
 #include "Assets.hxx"
 #include "AssetFile.hxx"
 #include "BaseFile.hxx"
+#include "BinAsset.hxx"
 #include "BinFile.hxx"
 #include "Game.hxx"
 #include "Logger.hxx"

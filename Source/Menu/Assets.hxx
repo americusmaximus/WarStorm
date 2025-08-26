@@ -129,6 +129,7 @@ LPVOID ReadAssetFileChunk(BFH indx, U32 chunk);
 S32 AcquireAssetFileOffset(BFH indx);
 S32 AcquireAssetFileSize(BFH indx);
 S32 SelectAssetFileOffset(BFH indx, S32 distance, DWORD method);
+U32 AcquireAssetContent(LPCSTR name, LPVOID* content, U32 size);
 U32 AcquireBinFileChunkSize(BFH indx, U32 offset);
 U32 ReadAssetFile(BFH indx, LPVOID content, U32 size);
 U32 ReadAssetFileMultiChunk(LPVOID result, BFH indx, U32 offset, U32 size);
