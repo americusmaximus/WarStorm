@@ -32,7 +32,6 @@ typedef struct Module
 {
     HMODULE                         Handle;
     GAME                            Game;   // ToGame
-    U8                              Unknown[348]; // TODO
     SOUNDPTR                        Sound;
     RENDERERPTR                     Renderer;
     HMODULE                         Text;

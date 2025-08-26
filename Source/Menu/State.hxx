@@ -22,6 +22,7 @@ SOFTWARE.
 
 #pragma once
 
+#include "MainControl.hxx"
 #include "Window.hxx"
 
 #include <App.hxx>
@@ -32,17 +33,19 @@ typedef struct StateModuleContainer
 
     struct
     {
-        LPSTR                       All;                            // TODO
-        LPSTR*                      Args;                           // TODO
-        U32                         Count;                          // TODO
+        LPSTR                       All;                            // 0x100e93e8
+        LPSTR*                      Args;                           // 0x100e93ec
+        U32                         Count;                          // 0x100e93f0
     } Arguments;
 
-    BOOL IsIniActive;                                               // TODO
+    BOOL IsIniActive;                                               // 0x100b46bc
 
-    MODULEPTR                       Module;                         // TODO
-    RENDERERPTR                     Renderer;                       // TODO
+    MODULEPTR                       Module;                         // 0x100b5828
+    RENDERERPTR                     Renderer;                       // 0x100b5b60
     WINDOWPTR                       Window;                         // 0x100b71c8
     LOGGERPTR                       Logger;                         // 0x100b71cc
+
+    MAINCONTROLPTR                  Main;                           // 0x100b5eac
 
     CHAR                            Name[MAX_PLAYER_NAME_LENGTH];   // TODO
 } STATEMODULECONTAINER, * STATEMODULECONTAINERPTR;

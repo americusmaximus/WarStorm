@@ -20,22 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#include "Game.hxx"
+#include "State.hxx"
 
-#include <Strings.hxx>
-
-#define MAX_SCRATCH_STRING_LENGTH       256
-
-U32 AcquireAnsiString(LPSTR result, U32 length, LPCSTR value, S32 limit);
-
-typedef struct StringsState
+// 0x100188e0
+STATUS AcquireGameStatus()
 {
-    CHAR Scratch[MAX_SCRATCH_STRING_LENGTH]; // 0x1009f424
-} STRINGSSTATE, * STRINGSSTATEPTR;
-
-EXTERN STRINGSSTATE StringsState;
-
-LPSTR CLASSCALL AcquireStringValueValue(STRINGVALUEPTR self);
-STRINGVALUEPTR AcquireStringValue(STRINGVALUEPTR self, LPCSTR format, ...);
-STRINGVALUEPTR CLASSCALL AcquireStringValue(STRINGVALUEPTR self, STRINGVALUEPTR value);
-VOID CLASSCALL ReleaseStringValue(STRINGVALUEPTR self);
+    return State.Module->Game.Status;
+}

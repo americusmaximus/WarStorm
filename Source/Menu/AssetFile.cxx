@@ -47,8 +47,19 @@ STATIC ASSETFILESELF AssetFileSelf =
     AssetFileGetSize,
     (ASSETFILEGETSTRINGACTION)BaseFileGetString,
     (ASSETFILESETSTRINGACTION)BaseFileSetString,
-    AssetFileUnk12
+    AssetFileGetFolder
 };
+
+// 0x10091338
+STATIC ASSETFILEFOLDERSELF AssetFileFolderSelf =
+{
+    AssetFileFolderGetFile,
+    AssetFileFolderGetFileFinder,
+    AssetFileFolderCreateFolder
+};
+
+// 0x100e93d8
+ASSETFILEFOLDER AssetFileFolderState;
 
 // 0x100774d0
 ASSETFILEPTR CLASSCALL AssetFileActivate(ASSETFILEPTR self)
@@ -145,9 +156,9 @@ S32 CLASSCALL AssetFileGetSize(ASSETFILEPTR self)
 }
 
 // 0x100774e0
-LPVOID CLASSCALL AssetFileUnk12(ASSETFILEPTR self)
+ASSETFILEFOLDERPTR CLASSCALL AssetFileGetFolder(ASSETFILEPTR self)
 {
-    return NULL; // &PTR_100e93d8; // TODO NOT IMPLEMENTED
+    return &AssetFileFolderState;
 }
 
 // 0x100775b0
@@ -235,4 +246,31 @@ VOID CloseAssetFile(BFH indx)
     }
 
     return;
+}
+
+// 0x10077440
+// 0x10077450
+VOID ActivateAssetFileFolder()
+{
+    AssetFileFolderState.Self = &AssetFileFolderSelf;
+}
+
+// 0x10077470
+ASSETFILEPTR CLASSCALL AssetFileFolderGetFile(ASSETFILEFOLDERPTR self)
+{
+    ASSETFILEPTR file = (ASSETFILEPTR)malloc(sizeof(ASSETFILE));
+
+    return file != NULL ? AssetFileActivate(file) : NULL;
+}
+
+// 0x10077460
+ASSETFILEFINDERPTR CLASSCALL AssetFileFolderGetFileFinder(ASSETFILEFOLDERPTR self)
+{
+    return NULL;
+}
+
+// 0x10074930
+BOOL CLASSCALL AssetFileFolderCreateFolder(ASSETFILEFOLDERPTR self, LPCSTR name)
+{
+    return FALSE;
 }

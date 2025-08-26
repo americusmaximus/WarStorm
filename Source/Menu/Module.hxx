@@ -22,20 +22,15 @@ SOFTWARE.
 
 #pragma once
 
-#include <Strings.hxx>
+#include "Basic.hxx"
 
-#define MAX_SCRATCH_STRING_LENGTH       256
+BOOL InitializeModuleAction();
+BOOL ExecuteModuleAction();
+BOOL ReleaseModuleAction();
 
-U32 AcquireAnsiString(LPSTR result, U32 length, LPCSTR value, S32 limit);
+VOID AcquireStartArguments(LPCSTR value);
+VOID AcquireStartArguments(LPCSTR value, LPSTR* args, LPSTR values, U32* count, U32* length);
+BOOL AcquireStartArguments(LPCSTR name, LPSTR value, U32 length);
+VOID ReleaseStartArguments();
 
-typedef struct StringsState
-{
-    CHAR Scratch[MAX_SCRATCH_STRING_LENGTH]; // 0x1009f424
-} STRINGSSTATE, * STRINGSSTATEPTR;
-
-EXTERN STRINGSSTATE StringsState;
-
-LPSTR CLASSCALL AcquireStringValueValue(STRINGVALUEPTR self);
-STRINGVALUEPTR AcquireStringValue(STRINGVALUEPTR self, LPCSTR format, ...);
-STRINGVALUEPTR CLASSCALL AcquireStringValue(STRINGVALUEPTR self, STRINGVALUEPTR value);
-VOID CLASSCALL ReleaseStringValue(STRINGVALUEPTR self);
+VOID AcquireIniFileState();

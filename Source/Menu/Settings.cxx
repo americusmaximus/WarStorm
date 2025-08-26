@@ -20,22 +20,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#include "Settings.hxx"
+#include "State.hxx"
 
-#include <Strings.hxx>
+#include <..\Text\Resources.hxx>
 
-#define MAX_SCRATCH_STRING_LENGTH       256
+#include <stdio.h>
 
-U32 AcquireAnsiString(LPSTR result, U32 length, LPCSTR value, S32 limit);
+#define MAX_SETTINGS_VALUE_LENGTH           64
+#define MAX_SETTINGS_OUTPUT_VALUE_LENGTH    512
 
-typedef struct StringsState
+// 0x100173c0
+VOID AcquireSettingsValue(STRINGVALUEPTR result, CONST U32 indx, ...)
 {
-    CHAR Scratch[MAX_SCRATCH_STRING_LENGTH]; // 0x1009f424
-} STRINGSSTATE, * STRINGSSTATEPTR;
+    CHAR setting[MAX_SETTINGS_VALUE_LENGTH];
+    LoadStringA(State.Module->Text, indx, setting, MAX_SETTINGS_VALUE_LENGTH);
 
-EXTERN STRINGSSTATE StringsState;
+    CHAR output[MAX_SETTINGS_OUTPUT_VALUE_LENGTH];
 
-LPSTR CLASSCALL AcquireStringValueValue(STRINGVALUEPTR self);
-STRINGVALUEPTR AcquireStringValue(STRINGVALUEPTR self, LPCSTR format, ...);
-STRINGVALUEPTR CLASSCALL AcquireStringValue(STRINGVALUEPTR self, STRINGVALUEPTR value);
-VOID CLASSCALL ReleaseStringValue(STRINGVALUEPTR self);
+    va_list args;
+    va_start(args, indx);
+    vsprintf(output, setting, args);
+    va_end(args);
+
+    result->Value = (LPSTR)malloc(strlen(output) + 1);
+
+    strcpy(result->Value, output);
+}

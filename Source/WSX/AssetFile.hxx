@@ -25,6 +25,8 @@ SOFTWARE.
 #include "BinFile.hxx"
 
 struct AssetFile;
+struct AssetFileFinder;
+struct AssetFileFolder;
 
 typedef AssetFile* (CLASSCALL* ASSETFILERELEASEACTION)(AssetFile* self, CONST OBJECTRELEASETYPE mode);
 typedef BOOL(CLASSCALL* ASSETFILEISACTIOVEACTION)(AssetFile* self);
@@ -38,7 +40,7 @@ typedef S32(CLASSCALL* ASSETFILEGETPOINTERACTION)(AssetFile* self);
 typedef S32(CLASSCALL* ASSETFILEGETSIZEACTION)(AssetFile* self);
 typedef U32(CLASSCALL* ASSETFILEGETSTRINGACTION)(AssetFile* self, LPSTR string, U32 length);
 typedef U32(CDECLAPI* ASSETFILESETSTRINGACTION)(AssetFile* self, LPSTR format, ...);
-typedef LPVOID(CLASSCALL* ASSETFILEUNKNOWN12ACTION)(AssetFile* self); // TODO
+typedef AssetFileFolder* (CLASSCALL* ASSETFILEGETFOLDERACTION)(AssetFile* self);
 
 // INHERITANCE: BaseFileSelf
 #pragma pack(push, 1)
@@ -56,7 +58,7 @@ typedef struct AssetFileSelf
     ASSETFILEGETSIZEACTION          GetSize;
     ASSETFILEGETSTRINGACTION        GetString;
     ASSETFILESETSTRINGACTION        SetString;
-    ASSETFILEUNKNOWN12ACTION        Unk12;      // TODO
+    ASSETFILEGETFOLDERACTION        GetFolder;
 } ASSETFILESELF, * ASSETFILESELFPTR;
 #pragma pack(pop)
 
@@ -68,3 +70,27 @@ typedef struct AssetFile
     BFH                 Value;
 } ASSETFILE, * ASSETFILEPTR;
 #pragma pack(pop)
+
+typedef AssetFile* (CLASSCALL* ASSETFILEFOLDERGETFILEACTION)(AssetFileFolder* self);
+typedef AssetFileFinder* (CLASSCALL* ASSETFILEFOLDERGETFILEFINDERACTION)(AssetFileFolder* self);
+typedef BOOL(CLASSCALL* ASSETFILEFOLDERCREATEFOLDERACTION)(AssetFileFolder* self, LPCSTR name);
+
+// INHERITANCE: BaseFileFolderSelf
+#pragma pack(push, 1)
+typedef struct AssetFileFolderSelf
+{
+    ASSETFILEFOLDERGETFILEACTION        GetFile;
+    ASSETFILEFOLDERGETFILEFINDERACTION  GetFileFinder;
+    ASSETFILEFOLDERCREATEFOLDERACTION   CreateFolder;
+} ASSETFILEFOLDERSELF, * ASSETFILEFOLDERSELFPTR;
+#pragma pack(pop)
+
+// INHERITANCE: BaseFileFolder
+#pragma pack(push, 1)
+typedef struct AssetFileFolder
+{
+    ASSETFILEFOLDERSELFPTR Self;
+} ASSETFILEFOLDER, * ASSETFILEFOLDERPTR;
+#pragma pack(pop)
+
+typedef AssetFileFinder ASSETFILEFINDER, * ASSETFILEFINDERPTR;

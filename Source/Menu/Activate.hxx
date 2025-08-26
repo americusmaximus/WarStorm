@@ -26,8 +26,7 @@ SOFTWARE.
 
 VOID Activate();
 
-typedef LPVOID(*CLASSCALL ACTIVATEACTION)(LPVOID self);
-typedef LPVOID(*CLASSCALL RELEASEACTION)(LPVOID self);
+VOID ActivateWindowState();
 
 VOID ActivateInputInitializeState();
 VOID ActivateInputInitialize();
@@ -58,6 +57,9 @@ VOID ActivateBinArchiveState();
 VOID ActivateBinArchives();
 VOID ReleaseBinArchives();
 VOID ReleaseBinArchivesAction();
+
+typedef LPVOID(*CLASSCALL ACTIVATEACTION)(LPVOID self);
+typedef LPVOID(*CLASSCALL RELEASEACTION)(LPVOID self);
 
 VOID ActivateItems(LPVOID pointer, U32 size, U32 count, ACTIVATEACTION action);
 VOID ReleaseItems(LPVOID pointer, U32 size, U32 count, RELEASEACTION action);

@@ -22,11 +22,23 @@ SOFTWARE.
 
 #include "ControlCommand.hxx"
 #include "Cursor.hxx"
+#include "State.hxx"
 #include "Window.hxx"
 
 #include <stdlib.h>
 
+#define WINDOW_CLASS_STYLE_NONE             0
+
 #define WINDOW_ACTION_HANDLER_PRIORITY      0x8100
+
+// ORIGINAL: VITYACLASS
+#define DEFAULT_WINDOW_STATE_CLASS_NAME     "WarStorm"
+
+// ORIGINAL: Just a simple VITYA window :-)
+#define DEFAULT_WINDOW_STATE_TITLE_NAME     "War Storm"
+
+#define DEFAULT_WINDOW_STATE_WIDTH          200
+#define DEFAULT_WINDOW_STATE_HEIGHT         200
 
 #define DEFAULT_INITIAL_CURSOR_POSITION     (-100000)
 #define DEFAULT_UPDATE_CURSOR_POSITION      (-1000000)
@@ -35,6 +47,74 @@ SOFTWARE.
 #define MAX_WINDOW_MESSAGE_CHARACTER_LENGTH 128
 
 WINDOWCONTAINER WindowState;
+
+// 0x1002f360
+WINDOWPTR CLASSCALL ActivateWindowState(WINDOWPTR self, ACTIONHANDLERLAMBDA init, ACTIONHANDLERLAMBDA execute, ACTIONHANDLERLAMBDA release)
+{
+    INITIALIZEACTIONHANDLER(&ActionState.Initialize, init);
+    INITIALIZEACTIONHANDLER(&ActionState.Execute, execute);
+    INITIALIZEACTIONHANDLER(&ActionState.Release, release);
+
+    InitializeWindowState(self);
+
+    return self;
+}
+
+// 0x10076300
+LRESULT WINAPI WindowStateMessageHandler(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
+{
+    switch (msg)
+    {
+    case WM_DESTROY: { PostQuitMessage(EXIT_SUCCESS); break; }
+    case WM_SETFOCUS: { State.Window->IsActive = TRUE; break; }
+    case WM_KILLFOCUS: { State.Window->IsActive = FALSE; break; }
+    }
+
+    for (ActionState.Active = ActionState.Message;
+        ActionState.Active != NULL; ActionState.Active = ActionState.Active->Next)
+    {
+        LRESULT result = 0;
+        if (!INVOKEWINDOWACTIONHANDLERLAMBDA(ActionState.Active->Action, hwnd, msg, wp, lp, &result)) { return result; }
+
+        if (ActionState.Active->Next == NULL) { break; }
+    }
+
+    return DefWindowProcA(hwnd, msg, wp, lp);
+}
+
+// 0x10076250
+VOID CLASSCALL InitializeWindowState(WINDOWPTR self)
+{
+    State.Window = self;
+
+    self->Instance = NULL;
+    self->Args = NULL;
+    self->HWND = NULL;
+
+    self->Class.style = WINDOW_CLASS_STYLE_NONE;
+    self->Class.lpfnWndProc = WindowStateMessageHandler;
+    self->Class.cbClsExtra = 0;
+    self->Class.cbWndExtra = 0;
+    self->Class.hInstance = NULL;
+    self->Class.hIcon = NULL;
+    self->Class.hCursor = NULL;
+    self->Class.hbrBackground = (HBRUSH)GetStockObject(NULL_BRUSH);
+    self->Class.lpszMenuName = NULL;
+    self->Class.lpszClassName = DEFAULT_WINDOW_STATE_CLASS_NAME;
+
+    strcpy(self->Title, DEFAULT_WINDOW_STATE_TITLE_NAME);
+
+    self->Style = WS_POPUP;
+
+    self->Y = 0;
+    self->X = 0;
+    self->Width = DEFAULT_WINDOW_STATE_WIDTH;
+    self->Height = DEFAULT_WINDOW_STATE_HEIGHT;
+
+    self->Menu = NULL;
+
+    self->IsActive = TRUE;
+}
 
 // 0x10075510
 VOID SelectWindowInputState(WINDOWINPUTSTATE state)

@@ -22,14 +22,23 @@ SOFTWARE.
 
 #include "Action.hxx"
 #include "Activate.hxx"
+#include "AssetFile.hxx"
 #include "Assets.hxx"
 #include "BinArchive.hxx"
 #include "BinFile.hxx"
 #include "BinFileContent.hxx"
 #include "Input.hxx"
 #include "ZipFile.hxx"
+#include "Window.hxx"
 
 #include <stdlib.h>
+
+// 0x1002f330
+// 0x1002f340
+VOID ActivateWindowState()
+{
+    ActivateWindowState(&WindowState.Window, InitializeModuleAction, ExecuteModuleAction, ReleaseModuleAction);
+}
 
 // 0x10075fd0
 VOID ActivateInputInitializeState()
@@ -326,7 +335,7 @@ VOID Activate()
     // TODO FUN_1002e150();
     // TODO FUN_1002e190();
     // TODO FUN_1002e410();
-    // TODO thunk_FUN_1002f340();
+    ActivateWindowState();
     // TODO FUN_1002f450();
     // TODO FUN_1002f480();
     ActivateBinFileFolder();
@@ -338,7 +347,7 @@ VOID Activate()
     ActivateInputMessageState();
     ActivateBinFilesState();
     ActivateBinArchiveState();
-    // TODO thunk_FUN_10077450();
+    ActivateAssetFileFolder();
     ActivateZipFileFolder();
     ActivateZipWriterFolder();
     // TODO FUN_10080830();

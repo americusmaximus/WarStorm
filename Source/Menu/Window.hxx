@@ -28,7 +28,7 @@ SOFTWARE.
 
 typedef struct WindowContainer
 {
-    WINDOW                  Window;     // TODO
+    WINDOW                  Window;     // 0x100b4ff8
 
     U32                     Ticks;      // TODO
 
@@ -58,6 +58,9 @@ typedef struct WindowContainer
 } WINDOWCONTAINER, * WINDOWCONTAINERPTR;
 
 EXTERN WINDOWCONTAINER WindowState;
+
+WINDOWPTR CLASSCALL ActivateWindowState(WINDOWPTR self, ACTIONHANDLERLAMBDA init, ACTIONHANDLERLAMBDA execute, ACTIONHANDLERLAMBDA release);
+VOID CLASSCALL InitializeWindowState(WINDOWPTR self);
 
 BOOL WindowMessageHandler(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, LRESULT* result);
 VOID InitializeWindowActionHandler(U32 priority, WINDOWACTIONHANDLERLAMBDA action);

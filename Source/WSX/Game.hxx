@@ -57,11 +57,16 @@ typedef struct Game
     U32             TurnDelay;
     S32             Unk09; // TODO
     U32             Ticks;
+    U32             Unk11; // TODO
+    U32             Unk12; // TODO
+    U32             Unk13; // TODO
     STATUS          Status;
+    U8              Unk12[80]; // TODO
     S32             NextMap;
     S32             NextMission;
     PLAYER          Players[MAX_PLAYER_COUNT];
     U32             Time;
+    CHAR            Unknown[256]; // TODO
     CHAR            SaveFile[MAX_FILE_NAME_LENGTH]; // TODO name
 } GAME, * GAMEPTR;
 #pragma pack(pop)

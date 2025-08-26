@@ -35,9 +35,12 @@
     <ClInclude Include="DirectInput.hxx" />
     <ClInclude Include="Dossier.hxx" />
     <ClInclude Include="BinFileContent.hxx" />
+    <ClInclude Include="Game.hxx" />
     <ClInclude Include="Input.hxx" />
     <ClInclude Include="Logger.hxx" />
+    <ClInclude Include="Module.hxx" />
     <ClInclude Include="Resources.hxx" />
+    <ClInclude Include="Settings.hxx" />
     <ClInclude Include="Shortcuts.hxx" />
     <ClInclude Include="State.hxx" />
     <ClInclude Include="Strings.hxx" />
@@ -63,10 +66,12 @@
     <ClCompile Include="ControlCommand.cxx" />
     <ClCompile Include="Cursor.cxx" />
     <ClCompile Include="Dossier.cxx" />
+    <ClCompile Include="Game.cxx" />
     <ClCompile Include="Input.cxx" />
     <ClCompile Include="Logger.cxx" />
     <ClCompile Include="Main.cxx" />
     <ClCompile Include="Module.cxx" />
+    <ClCompile Include="Settings.cxx" />
     <ClCompile Include="Shortcuts.cxx" />
     <ClCompile Include="State.cxx" />
     <ClCompile Include="Strings.cxx" />

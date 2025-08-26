@@ -22,20 +22,6 @@ SOFTWARE.
 
 #pragma once
 
-#include <Strings.hxx>
+#include "Strings.hxx"
 
-#define MAX_SCRATCH_STRING_LENGTH       256
-
-U32 AcquireAnsiString(LPSTR result, U32 length, LPCSTR value, S32 limit);
-
-typedef struct StringsState
-{
-    CHAR Scratch[MAX_SCRATCH_STRING_LENGTH]; // 0x1009f424
-} STRINGSSTATE, * STRINGSSTATEPTR;
-
-EXTERN STRINGSSTATE StringsState;
-
-LPSTR CLASSCALL AcquireStringValueValue(STRINGVALUEPTR self);
-STRINGVALUEPTR AcquireStringValue(STRINGVALUEPTR self, LPCSTR format, ...);
-STRINGVALUEPTR CLASSCALL AcquireStringValue(STRINGVALUEPTR self, STRINGVALUEPTR value);
-VOID CLASSCALL ReleaseStringValue(STRINGVALUEPTR self);
+VOID AcquireSettingsValue(STRINGVALUEPTR result, U32 indx, ...);
